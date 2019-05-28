@@ -486,7 +486,7 @@ app.post("/home",function(req,res){
 					});
 				});
 			}
-					setTimeout(explode, 35000);
+					setTimeout(explode, 25000);
 
           await browser.close();
         })();
