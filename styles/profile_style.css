@@ -170,9 +170,11 @@ input[type=submit] {
   display: inline-grid;
   background-color: #fff;
   color: #444;
+  margin-left: 30%;
+  margin-right: 30%;
   margin-top:60px;
-  position:relative;
-  left:27%;
+  /* position:relative;
+  left:27%; */
   grid-gap: 10px;
   grid-template-rows: 200px 200px 200px;
   grid-template-columns: 200px 200px 200px;
