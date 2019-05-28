@@ -1,0 +1,69 @@
+{
+  "18-Feb-2019": {
+    "key": "18-Feb-2019",
+    "value": [
+      "CS301",
+      "CS303",
+      "CS305",
+      "CS307",
+      "CS301",
+      "CS301",
+      "CS303"
+    ]
+  },
+  "11-Mar-2019": {
+    "key": "11-Mar-2019",
+    "value": [
+      "CS204",
+      "CS202",
+      "CS204",
+      "CS208",
+      "",
+      "",
+      ""
+    ]
+  },
+  "17-Apr-2019": {
+    "key": "17-Apr-2019",
+    "value": [
+      "CS202",
+      "CS206",
+      "MA202",
+      "HS210",
+      "CS206",
+      "MA202",
+      "CS202"
+    ]
+  },
+  "14-May-2019": {
+    "key": "14-May-2019",
+    "value": [
+      "MA202",
+      "CS202",
+      "",
+      "CS202",
+      "",
+      "",
+      ""
+    ]
+  },
+  "undefined": {
+    "value": []
+  }
+}
+
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341
+CS301 CS303 CS305 CS307 CS309 Elective CS331 CS333 CS341

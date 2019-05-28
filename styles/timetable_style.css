@@ -1,0 +1,83 @@
+.user_text{
+  display: inline-block;
+}
+
+.user_details{
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.class_r{
+  float:right;
+  margin-right: 20px;
+}
+th{
+  text-align: center;
+}
+tr th{
+  width:12.5%;
+}
+tr td{
+  text-align: center;
+  width:12.5%;
+  padding:7px;
+}
+/* table{
+  margin-top: 50px;
+} */
+table, th, td {
+  border: 2px solid black;
+}
+/* Ripple effect */
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #b3b8bc 1%) center/15000%;
+}
+.ripple:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+/* Button style */
+input[type=submit] {
+  border: none;
+  border-radius: 2px;
+  padding: 12px 18px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: white;
+  background-color: #000000;
+  box-shadow: 0 0 4px #999;
+  outline: none;
+}
+h5{
+  font-size: 15px;
+}
+h6{
+  font-size: 12px;
+}
+#t1{
+  width:70%;
+  margin-top: 50px;
+
+}
+.sub_details{
+  width:30%;
+  float:right;
+  position:relative;
+  bottom:250px;
+}
+#t2{
+  position: relative;
+  bottom:200px;
+  display: none;
+}
+.middler{
+  position: relative;
+  left:32.5%;
+}

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <script type="text/javascript" src=".jquery-3.4.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap.css">
+    <link rel="stylesheet" href="/profile_style.css">
+    <script type="text/javascript">
+    function checkornot(){
+        document.getElementById("cmn-toggle-1").addEventListener("click", function(){
+        document.getElementById("check_form").submit();
+        });
+    }
+    window.onload = checkornot;
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><strong>RSMS</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown" >
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/timetable">Time Table</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/summary">Class Summary</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+    <div class="user_details">
+        <h5 class="user_text"> Name : <%= stud_name %></h5>
+        <div class="class_r">
+          <h5 class="user_text">Class : <%= class_name %></h5>
+        </div>
+    </div>
+    <hr>
+    <div class="user_details">
+        <h5 class="user_text"> Date : <%= date %></h5>
+        <div class="but_position">
+          <div class="switch">
+            <form action="/workday" method="post" id="check_form">
+              <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round " name="yesorno"  type="checkbox" <%= check_ed %>>
+              <label for="cmn-toggle-1"></label>
+            </form>
+          </div>
+        </div>
+        <div class="class_r">
+          <h5 class="user_text">Day : <%= day %></h5>
+        </div>
+    </div>
+    <hr>
+    <div class="container" style="display:<%=hidstr%>">
+        <p>Was todays's Time Table followed correctly?</p>
+        <table id="t1" style"width:100%" align=center>
+          <tr>
+        <% for(var i=0;i<=6;i++){ %>
+             <td><%=table_arr[arr[i]]%></td>
+          <% } %>
+
+          </tr>
+        </table>
+        <div class="yesorno" >
+          <form action="/ttable_alter" method="post">
+            <input type="submit" class="btn-success" name="yesno" value="Yes">
+            <input type="submit" class="btn-danger" name="yesno" value="No">
+          </form>
+        </div>
+        <p><%=response %></p>
+        <div class="xtra">
+          <form  action="ttable_alter_absent" method="post">
+            <input class="specific ripple" type="submit" name="xtra_cls" value="Extra Class ?">
+          </form>
+
+        </div>
+    </div>
+    <div class="container" style="display:<%= hidyesorno%>">
+      <p><strong>Make Changes here</strong></p>
+      <form action="/edittable" method="post">
+      <table id="t5" style"width:100%" align=center>
+        <tr>
+           <td>
+             <select name="a_1">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+           <td>
+             <select name="a_2">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+           <td>
+             <select name="a_3">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+           <td>
+             <select name="a_4">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+           <td>
+             <select name="a_5">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+           <td>
+             <select name="a_6">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+           <td>
+             <select name="a_7">
+                 <option value="CS301">CS301</option>
+                 <option value="CS303">CS303</option>
+                 <option value="CS305">CS305</option>
+                 <option value="CS307">CS307</option>
+                 <option value="CS309">CS309</option>
+                 <option value="Elective">Elective</option>
+                 <option value="CS341">CS341</option>
+                 <option value="CS331">CS331</option>
+                 <option value="CS333">CS333</option>
+                 <option value="Free">Free</option>
+             </select>
+           </td>
+        </tr>
+      </table>
+        <input class="ripple but_pos" type="submit" name="changedval" value="SAVE">
+      </form>
+    </div>
+  <div class="wrapper">
+    <div class="box a">
+      <h3>CS301</h3>
+      <h6>Bunked : <%=absent_arr[0]%> </h6>
+      <h6>Total  : <%=summary_arr[0]%> </h6>
+      <h1><%=percent_arr[0]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[0]%> </h6>
+    </div>
+    <div class="box b">
+      <h3>CS303</h3>
+      <h6>Bunked : <%=absent_arr[1]%> </h6>
+      <h6>Total  : <%=summary_arr[1]%> </h6>
+      <h1><%=percent_arr[1]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[1]%> </h6>
+    </div>
+    <div class="box c">
+      <h3>CS305</h3>
+      <h6>Bunked : <%=absent_arr[2]%> </h6>
+      <h6>Total  : <%=summary_arr[2]%> </h6>
+      <h1><%=percent_arr[2]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[2]%> </h6>
+    </div>
+    <div class="box d">
+      <h3>CS307</h3>
+      <h6>Bunked : <%=absent_arr[3]%> </h6>
+      <h6>Total  : <%=summary_arr[3]%> </h6>
+      <h1><%=percent_arr[3]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[3]%> </h6>
+    </div>
+    <div class="box e">
+      <h3>CS309</h3>
+      <h6>Bunked : <%=absent_arr[4]%> </h6>
+      <h6>Total  : <%=summary_arr[4]%> </h6>
+      <h1><%=percent_arr[4]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[4]%> </h6>
+    </div>
+    <div class="box f">
+      <h3>Elective</h3>
+      <h6>Bunked : <%=absent_arr[5]%> </h6>
+      <h6>Total  : <%=summary_arr[5]%> </h6>
+      <h1><%=percent_arr[5]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[5]%> </h6>
+    </div>
+    <div class="box d">
+      <h3>CS331</h3>
+      <h6>Bunked : <%=absent_arr[6]%> </h6>
+      <h6>Total  : <%=summary_arr[6]%> </h6>
+      <h1><%=percent_arr[6]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[6]%> </h6>
+    </div>
+    <div class="box e">
+      <h3>CS333</h3>
+      <h6>Bunked : <%=absent_arr[7]%> </h6>
+      <h6>Total  : <%=summary_arr[7]%> </h6>
+      <h1><%=percent_arr[7]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[7]%> </h6>
+    </div>
+    <div class="box f">
+      <h3>CS341</h3>
+      <h6>Bunked : <%=absent_arr[8]%> </h6>
+      <h6>Total  : <%=summary_arr[8]%> </h6>
+      <h1><%=percent_arr[8]%>%</h1>
+      <h6>Bunkable : <%=bunk_arr[8]%> </h6>
+    </div>
+  </div>
+  </body>
+</html>
