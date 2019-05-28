@@ -264,7 +264,15 @@ app.post("/timetable",function(req,res){
 	res.render('ttable.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,table:req.body});
 });
 app.get("/summary",function(req,res){
-	res.render('summary.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class});
+	const fs = require('fs');
+	fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
+		if (err) throw err;
+		summary=JSON.parse(data)
+		console.log(summary);
+		res.render('summary.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,sumarr:summary});
+	});
+
+
 });
 app.post("/home",function(req,res){
   uid = req.body.user;
@@ -557,7 +565,10 @@ app.post("/home",function(req,res){
 				fs.readFile('data/checkbox.txt', 'utf-8', (err, data) => {
 					if (err) throw err;
 					var chkbox=JSON.parse(data)
-					if(Object.keys(chkbox).length!=0){
+					fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
+						if (err) throw err;
+						var sum=JSON.parse(data)
+						if(Object.keys(chkbox).length!=0){
 								console.log("INSIDE First Loop)");
 									if(counter==0){ //change later to 0
 											if(d.getDay()==1){
@@ -582,11 +593,8 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["1_5"];
 													summary["p6"]=ftt["1_6"];
 													summary["p7"]=ftt["1_7"];
-													prependFile('data/summary.txt', JSON.stringify(summary), function (err) {
-													    if (err) {
-													        console.log("ERROR PREPENDING")
-													    }
-													    console.log('The "data to prepend" was prepended to file!');
+													sum.unshift(summary);
+													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
 												}
 												setTimeout(madedelay,5000);
@@ -615,11 +623,8 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["2_5"];
 													summary["p6"]=ftt["2_6"];
 													summary["p7"]=ftt["2_7"];
-													prependFile('data/summary.txt', JSON.stringify(summary), function (err) {
-													    if (err) {
-													        console.log("ERROR PREPENDING")
-													    }
-													    console.log('The "data to prepend" was prepended to file!');
+													sum.unshift(summary);
+													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
 												}
 												setTimeout(madedelay,5000);
@@ -646,11 +651,8 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["3_5"];
 													summary["p6"]=ftt["3_6"];
 													summary["p7"]=ftt["3_7"];
-													prependFile('data/summary.txt', JSON.stringify(summary), function (err) {
-													    if (err) {
-													        console.log("ERROR PREPENDING")
-													    }
-													    console.log('The "data to prepend" was prepended to file!');
+													sum.unshift(summary);
+													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
 												}
 												setTimeout(madedelay,5000);
@@ -676,11 +678,8 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["4_5"];
 													summary["p6"]=ftt["4_6"];
 													summary["p7"]=ftt["4_7"];
-													prependFile('data/summary.txt', JSON.stringify(summary), function (err) {
-													    if (err) {
-													        console.log("ERROR PREPENDING")
-													    }
-													    console.log('The "data to prepend" was prepended to file!');
+													sum.unshift(summary);
+													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
 												}
 												setTimeout(madedelay,5000);
@@ -706,11 +705,8 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["5_5"];
 													summary["p6"]=ftt["5_6"];
 													summary["p7"]=ftt["5_7"];
-													prependFile('data/summary.txt', JSON.stringify(summary), function (err) {
-													    if (err) {
-													        console.log("ERROR PREPENDING")
-													    }
-													    console.log('The "data to prepend" was prepended to file!');
+													sum.unshift(summary);
+													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
 												}
 												setTimeout(madedelay,5000);
@@ -733,11 +729,8 @@ app.post("/home",function(req,res){
 										summary["p5"]=ftt["a_5"];
 										summary["p6"]=ftt["a_6"];
 										summary["p7"]=ftt["a_7"];
-										prependFile('data/summary.txt', JSON.stringify(summary), function (err) {
-												if (err) {
-														console.log("ERROR PREPENDING")
-												}
-												console.log('The "data to prepend" was prepended to file!');
+										sum.unshift(summary);
+										fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 										});
 									}
 									setTimeout(madedelay,5000);
@@ -747,6 +740,7 @@ app.post("/home",function(req,res){
 		}else{
 			console.log("CHECKBOX UNTICKED");
 		}
+		});
 	});
 }
 
