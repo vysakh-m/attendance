@@ -281,7 +281,7 @@ app.post("/home",function(req,res){
     if(auth[uid].au_uid===uid && auth[uid].au_pass===pass){
         console.log("Login Success " + auth[uid].name);
         (async () => {
-          const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
+          const browser = await puppeteer.launch({ headless: true,executablePath:'/node_modules/puppeteer/.local-chromium/linux-599821/chrome-linux/chrome' , args: ['--no-sandbox', '--disable-setuid-sandbox']});
           const page = await browser.newPage();
           await page.goto('https://www.rajagiritech.ac.in/stud/ktu/student');
           await page.type('input[name="Userid"]', uid);
