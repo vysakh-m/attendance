@@ -11,6 +11,10 @@
   float:right;
   margin-right: 20px;
 }
+.wrapper h6{
+  margin-bottom: 3px;
+  text-align: center;
+}
 h5{
   font-size: 15px;
 }

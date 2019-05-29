@@ -27,6 +27,7 @@ var sum_arr=[];
 var abs_arr=[];
 var per_arr=[];
 var bun_arr=[];
+var toatt_arr=[];
 // var day_att_counter=0;
 app.set('port',(process.env.PORT || 5000));
 var uid_list=["U1703137","U1703138","U1703139","U1703140","U1703141","U1703142","U1703143","U1703144","U1703145","U1703146","U1703147","U1703148","U1703149","U1703150","U1703151","U1703152","U1703153","U1703154","U1703155","U1703156","U1703157","U1703158","U1703159","U1703160","U1703161","U1703162","U1703163","U1703164","U1703165","U1703166","U1703167","U1703168","U1703169","U1703170","U1703171","U1703172","U1703173","U1703174","U1703175","U1703176","U1703177","U1703178","U1703179","U1703180","U1703181","U1703182","U1703183","U1703184","U1703185","U1703186","U1703187","U1703188","U1703189","U1703190","U1703191","U1703192","U1703193","U1703194","U1703195","U1703196","U1703197","U1703198","U1703199","U1703200","U1703201","U1703202","U1703203"]
@@ -113,13 +114,14 @@ var current_date=d_1+"-"+d_2+"-"+d_3;
 
 function dateupdate(){
 	d=new Date();
-	console.log("INSIDE DATE UPDATE");
 }
+//add the below code inside the above function during final submit
+	console.log("INSIDE DATE UPDATE");
 	if(d.getDay()==0 || d.getDay()==6){
 		const fs = require('fs');
 		fs.writeFile('data/checkbox.txt', JSON.stringify(inten_empty, null, 2) ,function(err,result){
 			console.log("CHANGED TO NULL SINCE SATURDAY OR SUNDAY");
-
+			intent_empty_string="none"
 		});
 	}else if(d.getDay()==1){
 		for(var i=1;i<8;i++){
@@ -152,7 +154,6 @@ function dateupdate(){
 		console.log("DAY'S TIMETABLE WRITTEN");
 	});
 
-
 app.get("/",function(req,res){
 	res.redirect('login');
 });
@@ -169,18 +170,28 @@ app.get("/home",function(req,res){
 				if (err) throw err;
 				timetable_read=JSON.parse(data1)
 
-				res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr});
+				res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 			});
 		}else{
 			fs.readFile('data/timetable.txt', 'utf-8', (err, data1) => {
 			if (err) throw err;
 			timetable_read=JSON.parse(data1)
-			res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr});
+			res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 			});
 	}
 	});
 });
+app.get("/logout",function(req,res){
+	glo_id="";
+	res.redirect("/login");
+})
+app.get("/instructions",function(req,res){
+	res.render('instructions.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class});
+});
 app.post("/workday",function(req,res){
+	if(d.getDay()==0 || d.getDay()==6){
+		intent_empty_string="";
+	}
 	const fs = require('fs');
 	fs.writeFile('data/checkbox.txt', JSON.stringify(req.body, null, 2) ,function(err,result){
 		console.log(" TIMETABLE WRITTEN");
@@ -389,7 +400,9 @@ app.post("/home",function(req,res){
 														var loop_temp_sum=sum_arr[i];
 														var loop_temp_abs=abs_arr[i];
 														var j =1;
+														var k =1;
 														var bunk_count=0;
+														var att_count=0;
 														while(j!=0){
 															if(loop_temp_abs*4<loop_temp_sum){
 																bunk_count++;
@@ -399,11 +412,28 @@ app.post("/home",function(req,res){
 																j=0;
 															}
 														}
-														bunk_count--;
+														if(bunk_count==0){
+															var loop_temp_sum=sum_arr[i];
+															var loop_temp_abs=abs_arr[i];
+															while(k!=0){
+																if(loop_temp_abs*4>loop_temp_sum){
+																	att_count++;
+																	loop_temp_sum++;
+																}else{
+																	k=0;
+																}
+															}
+															if(att_count!=0){
+																att_count++;
+															}
+														}else if(bunk_count>0){
+															bunk_count--;
+														}
 														bun_arr.push(bunk_count);
+														toatt_arr.push(att_count);
 													}
 													console.log(bun_arr);
-													res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr});
+													res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 												});
 											});
 											//=========================================
@@ -472,7 +502,9 @@ app.post("/home",function(req,res){
 																var loop_temp_sum=sum_arr[i];
 																var loop_temp_abs=abs_arr[i];
 																var j =1;
+																var k=1;
 																var bunk_count=0;
+																var att_count=0;
 																while(j!=0){
 																	if(loop_temp_abs*4<loop_temp_sum){
 																		bunk_count++;
@@ -482,10 +514,24 @@ app.post("/home",function(req,res){
 																		j=0;
 																	}
 																}
-																bunk_count--;
+																if(bunk_count==0){
+																	var loop_temp_sum=sum_arr[i];
+																	var loop_temp_abs=abs_arr[i];
+																	while(k!=0){
+																		if(loop_temp_abs*4>loop_temp_sum){
+																			att_count++;
+																			loop_temp_sum++;
+																		}else{
+																			k=0;
+																		}
+																	}
+																}else if(bunk_count>0){
+																	bunk_count--;
+																}
 																bun_arr.push(bunk_count);
+																toatt_arr.push(att_count);
 															}
-															res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr});
+															res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 												});
 											});
 										});
@@ -519,7 +565,7 @@ app.post("/home",function(req,res){
 	// setTimeout(delaying,50000);
     });
 
-
+		//COMMENT THIS OUT LATER BEFORE DEPLOYMENT
 		var currentD = new Date();
 		// var resetDate = new Date();
 		// resetDate.setHours(3,21,0);
@@ -534,26 +580,6 @@ app.post("/home",function(req,res){
 		}
 
 		//===========================================================================
-
-
-		// if(currentD==resetDate){
-		// 	day_att_counter=1;
-		// 	console.log(day_att_counter);
-		// }
-		// console.log("Current Time"+currentD);
-		// console.log("Reset Time"+resetDate);
-		//
-		// var j = schedule.scheduleJob({hour: 2, minute: 50}, function(){
-		// 	const fs = require('fs');
-		// 	fs.readFile('data/checkbox.txt', 'utf-8', (err, data) => {
-		// 		if (err) throw err;
-		// 		var chkbox=JSON.parse(data)
-		// 		if(Object.keys(chkbox).length!=0){
-		// 			intent_empty_string="";
-		// 		}
-		// 	});
-		// });
-		//
 		var resetTime = new Date();
 		resetTime.setHours(12,30,0);
 
@@ -749,7 +775,7 @@ app.post("/home",function(req,res){
 		// var daily_c_value = new Date();
 		// daily_c_value.setHours(11,22,0);
 		// console.log(daily_c_value);
-		cron.schedule('00 01 00 * * 0-6', () => {
+		cron.schedule('00 00 01 * * 0-6', () => {
 			counter=0;
 			dateupdate();
   		console.log('running a task every minute');
@@ -757,12 +783,12 @@ app.post("/home",function(req,res){
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 00 22 * * 0-6', () => {
+		cron.schedule('00 15 16 * * 0-6', () => {
 			loop();
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 30 16 * * 0-6', () => {
+		cron.schedule('00 36 16 * * 0-6', () => {
 			intent_empty_string=""
 			thk_res=""
 		},{

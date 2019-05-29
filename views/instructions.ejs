@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>DASHBOARD</title>
+    <script type="text/javascript" src="/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="/bootstrap.css">
+    <link rel="stylesheet" href="/instructions_style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><strong>RSMS</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown" >
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item ">
+            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/timetable">Time Table</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/summary">Class Summary</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/instructions">Instructions</a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+    <div class="user_details">
+        <h5 class="user_text"> Name : <%= stud_name %></h5>
+        <div class="class_r">
+          <h5 class="user_text">Class : <%= class_name %></h5>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+      <h2>INSTRUCTIONS</h2>
+      <p style="text-align:center; font-size:15px;">(The options below are common for all, which means that any one in the class need to do it only once per day.)</p>
+      <section>
+        <hr>
+        <h4>HOME</h4>
+        <hr>
+        <p>The Toggle Button in center is responsible for keeping a count on the total number of hours taken for each subject.</p>
+        <p>It is <strong>ON</strong> by default on Working days & changes to <strong>OFF</strong> state on Saturdays and Sundays </p>
+        <p>It's useful during extra classes, when it should be manually set to <strong>ON</strong> for that day's subjects to be counted.</p>
+        <p>Everyday after 4:30 PM, an option to confirm whether that day's timetable was followed correctly will be available.</p>
+        <p>Select <strong>YES</strong>  if was correctly followed</p>
+        <p>Select <strong>NO</strong> if not, and select subjects according to the schedule followed on that day.</p>
+        <p>If no response is given by 10:00 PM, it would go with the default value of <strong>YES</strong> and follow the actual timetable of that day.</p>
+        <p>If there is an extra class on working days, either go with the <strong>NO</strong> option as stated above or use the <strong>EXTRA CLASS</strong> option to select the day's schedule</p>
+        <p>If there is an extra class on Saturday , at first turn <strong>ON</strong> the Toggle Button, then select <strong>EXTRA CLASS</strong> from the option below & select the schedule followed on that day from the dropdown menu</p>
+      </section>
+      <section>
+        <hr>
+        <h4>TIME TABLE</h4>
+        <hr>
+        <p>Any Changes in the regular timetable should be updated in this page by using the <strong>EDIT</strong> option</p>
+        <p>After selecting the <strong>EDIT</strong> option, a table of Dropdown menu with the default values will be displayed just below the actual Timetable. Any changes could be done here.</p>
+      </section>
+      <section class="createmargin">
+        <hr>
+        <h4>SUMMARY</h4>
+        <hr>
+        <p>This section displays the list of all the working days & respective subjects taken. </p>
+      </section>
+
+    </div>
+  </body>
+</html>
