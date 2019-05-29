@@ -147,32 +147,18 @@ input[type=submit] {
   position:relative;
   left:43.5%;
 }
-/* .wrapper {
-  position:relative;
-  left:38%;
-  margin-top:15px;
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-gap: 10px;
-  background-color: #fff;
-  color: #444;
+.main_wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
- {
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  padding: 50px;
-  font-size: 100%;
-  text-align: left;
-} */
 .wrapper {
-  display: inline-grid;
+  display: grid;
   background-color: #fff;
   color: #444;
   margin-top:60px;
-  position:relative;
-  left:27%;
+  /* position:relative;
+  left:27%; */
   grid-gap: 10px;
   grid-template-rows: 200px 200px 200px;
   grid-template-columns: 200px 200px 200px;
