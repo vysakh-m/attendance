@@ -83,7 +83,7 @@
         </tr>
         <tr>
           <td>Tuesday</td>
-          <td><%= table["1_1"] %></td>
+          <td><%= table["2_1"] %></td>
           <td>
             <%=table["2_2"]%>
           </td>
@@ -204,100 +204,380 @@
               <td>Monday</td>
               <td>
                 <select name="1_1">
+                <%  if(table["1_1"]=="CS301"){ %>
+                    <option selected="selected" value="CS301">CS301</option>
+                  <%}else{%>
                     <option value="CS301">CS301</option>
+                  <%}%>
+                <%  if(table["1_1"]=="CS303"){%>
+                    <option selected="selected" value="CS303">CS303</option>
+                <%  }else{%>
                     <option value="CS303">CS303</option>
+                <%  }%>
+                <%  if(table["1_1"]=="CS305"){%>
+                    <option selected="selected" value="CS305">CS305</option>
+                <%  }else{%>
                     <option value="CS305">CS305</option>
+                <%  }%>
+                <%  if(table["1_1"]=="CS307"){%>
+                    <option selected="selected" value="CS307">CS307</option>
+                <%  }else{%>
                     <option value="CS307">CS307</option>
+                <%  }%>
+                <%  if(table["1_1"]=="CS309"){%>
+                    <option selected="selected" value="CS309">CS309</option>
+                <%  }else{%>
                     <option value="CS309">CS309</option>
+                <%  }%>
+                <%  if(table["1_1"]=="Elective"){%>
+                    <option selected="selected" value="Elective">Elective</option>
+                <%  }else{%>
                     <option value="Elective">Elective</option>
+                <%  }%>
+                <%  if(table["1_1"]=="CS341"){%>
+                    <option selected="selected" value="CS341">CS341</option>
+                <%  }else{%>
                     <option value="CS341">CS341</option>
+                <%  }%>
+                <%  if(table["1_1"]=="CS331"){%>
+                    <option selected="selected" value="CS331">CS331</option>
+                <%  }else{%>
                     <option value="CS331">CS331</option>
+                <%  }%>
+                <%  if(table["1_1"]=="CS333"){%>
+                    <option selected="selected" value="CS333">CS333</option>
+                <%  }else{%>
                     <option value="CS333">CS333</option>
+                <%  }%>
+                <%  if(table["1_1"]=="Free"){%>
+                    <option selected="selected" value="Free">Free</option>
+                <%  }else{%>
                     <option value="Free">Free</option>
+                <%  }%>
                 </select>
               </td>
               <td>
                 <select name="1_2">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["1_2"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["1_2"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["1_2"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="1_3">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["1_3"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["1_3"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["1_3"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="1_4">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["1_4"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["1_4"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["1_4"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="1_5">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["1_5"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["1_5"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["1_5"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="1_6">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["1_6"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["1_6"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["1_6"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="1_7">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["1_7"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["1_7"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["1_7"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
             </tr>
@@ -305,100 +585,380 @@
               <td>Tuesday</td>
               <td>
                 <select name="2_1">
+                <%  if(table["2_1"]=="CS301"){ %>
+                    <option selected="selected" value="CS301">CS301</option>
+                  <%}else{%>
                     <option value="CS301">CS301</option>
+                  <%}%>
+                <%  if(table["2_1"]=="CS303"){%>
+                    <option selected="selected" value="CS303">CS303</option>
+                <%  }else{%>
                     <option value="CS303">CS303</option>
+                <%  }%>
+                <%  if(table["2_1"]=="CS305"){%>
+                    <option selected="selected" value="CS305">CS305</option>
+                <%  }else{%>
                     <option value="CS305">CS305</option>
+                <%  }%>
+                <%  if(table["2_1"]=="CS307"){%>
+                    <option selected="selected" value="CS307">CS307</option>
+                <%  }else{%>
                     <option value="CS307">CS307</option>
+                <%  }%>
+                <%  if(table["2_1"]=="CS309"){%>
+                    <option selected="selected" value="CS309">CS309</option>
+                <%  }else{%>
                     <option value="CS309">CS309</option>
+                <%  }%>
+                <%  if(table["2_1"]=="Elective"){%>
+                    <option selected="selected" value="Elective">Elective</option>
+                <%  }else{%>
                     <option value="Elective">Elective</option>
+                <%  }%>
+                <%  if(table["2_1"]=="CS341"){%>
+                    <option selected="selected" value="CS341">CS341</option>
+                <%  }else{%>
                     <option value="CS341">CS341</option>
+                <%  }%>
+                <%  if(table["2_1"]=="CS331"){%>
+                    <option selected="selected" value="CS331">CS331</option>
+                <%  }else{%>
                     <option value="CS331">CS331</option>
+                <%  }%>
+                <%  if(table["2_1"]=="CS333"){%>
+                    <option selected="selected" value="CS333">CS333</option>
+                <%  }else{%>
                     <option value="CS333">CS333</option>
+                <%  }%>
+                <%  if(table["2_1"]=="Free"){%>
+                    <option selected="selected" value="Free">Free</option>
+                <%  }else{%>
                     <option value="Free">Free</option>
+                <%  }%>
                 </select>
               </td>
               <td>
                 <select name="2_2">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["2_2"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["2_2"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["2_2"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="2_3">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["2_3"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["2_3"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["2_3"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="2_4">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["2_4"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["2_4"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["2_4"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="2_5">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["2_5"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["2_5"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["2_5"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="2_6">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["2_6"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["2_6"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["2_6"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="2_7">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["2_7"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["2_7"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["2_7"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
             </tr>
@@ -406,100 +966,380 @@
               <td>Wednesday</td>
               <td>
                 <select name="3_1">
+                <%  if(table["3_1"]=="CS301"){ %>
+                    <option selected="selected" value="CS301">CS301</option>
+                  <%}else{%>
                     <option value="CS301">CS301</option>
+                  <%}%>
+                <%  if(table["3_1"]=="CS303"){%>
+                    <option selected="selected" value="CS303">CS303</option>
+                <%  }else{%>
                     <option value="CS303">CS303</option>
+                <%  }%>
+                <%  if(table["3_1"]=="CS305"){%>
+                    <option selected="selected" value="CS305">CS305</option>
+                <%  }else{%>
                     <option value="CS305">CS305</option>
+                <%  }%>
+                <%  if(table["3_1"]=="CS307"){%>
+                    <option selected="selected" value="CS307">CS307</option>
+                <%  }else{%>
                     <option value="CS307">CS307</option>
+                <%  }%>
+                <%  if(table["3_1"]=="CS309"){%>
+                    <option selected="selected" value="CS309">CS309</option>
+                <%  }else{%>
                     <option value="CS309">CS309</option>
+                <%  }%>
+                <%  if(table["3_1"]=="Elective"){%>
+                    <option selected="selected" value="Elective">Elective</option>
+                <%  }else{%>
                     <option value="Elective">Elective</option>
+                <%  }%>
+                <%  if(table["3_1"]=="CS341"){%>
+                    <option selected="selected" value="CS341">CS341</option>
+                <%  }else{%>
                     <option value="CS341">CS341</option>
+                <%  }%>
+                <%  if(table["3_1"]=="CS331"){%>
+                    <option selected="selected" value="CS331">CS331</option>
+                <%  }else{%>
                     <option value="CS331">CS331</option>
+                <%  }%>
+                <%  if(table["3_1"]=="CS333"){%>
+                    <option selected="selected" value="CS333">CS333</option>
+                <%  }else{%>
                     <option value="CS333">CS333</option>
+                <%  }%>
+                <%  if(table["3_1"]=="Free"){%>
+                    <option selected="selected" value="Free">Free</option>
+                <%  }else{%>
                     <option value="Free">Free</option>
+                <%  }%>
                 </select>
               </td>
               <td>
                 <select name="3_2">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["3_2"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["3_2"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["3_2"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="3_3">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["3_3"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["3_3"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["3_3"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="3_4">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["3_4"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["3_4"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["3_4"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="3_5">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["3_5"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["3_5"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["3_5"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="3_6">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["3_6"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["3_6"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["3_6"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="3_7">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["3_7"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["3_7"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["3_7"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
             </tr>
@@ -507,100 +1347,380 @@
               <td>Thursday</td>
               <td>
                 <select name="4_1">
+                <%  if(table["4_1"]=="CS301"){ %>
+                    <option selected="selected" value="CS301">CS301</option>
+                  <%}else{%>
                     <option value="CS301">CS301</option>
+                  <%}%>
+                <%  if(table["4_1"]=="CS303"){%>
+                    <option selected="selected" value="CS303">CS303</option>
+                <%  }else{%>
                     <option value="CS303">CS303</option>
+                <%  }%>
+                <%  if(table["4_1"]=="CS305"){%>
+                    <option selected="selected" value="CS305">CS305</option>
+                <%  }else{%>
                     <option value="CS305">CS305</option>
+                <%  }%>
+                <%  if(table["4_1"]=="CS307"){%>
+                    <option selected="selected" value="CS307">CS307</option>
+                <%  }else{%>
                     <option value="CS307">CS307</option>
+                <%  }%>
+                <%  if(table["4_1"]=="CS309"){%>
+                    <option selected="selected" value="CS309">CS309</option>
+                <%  }else{%>
                     <option value="CS309">CS309</option>
+                <%  }%>
+                <%  if(table["4_1"]=="Elective"){%>
+                    <option selected="selected" value="Elective">Elective</option>
+                <%  }else{%>
                     <option value="Elective">Elective</option>
+                <%  }%>
+                <%  if(table["4_1"]=="CS341"){%>
+                    <option selected="selected" value="CS341">CS341</option>
+                <%  }else{%>
                     <option value="CS341">CS341</option>
+                <%  }%>
+                <%  if(table["4_1"]=="CS331"){%>
+                    <option selected="selected" value="CS331">CS331</option>
+                <%  }else{%>
                     <option value="CS331">CS331</option>
+                <%  }%>
+                <%  if(table["4_1"]=="CS333"){%>
+                    <option selected="selected" value="CS333">CS333</option>
+                <%  }else{%>
                     <option value="CS333">CS333</option>
+                <%  }%>
+                <%  if(table["4_1"]=="Free"){%>
+                    <option selected="selected" value="Free">Free</option>
+                <%  }else{%>
                     <option value="Free">Free</option>
+                <%  }%>
                 </select>
               </td>
               <td>
                 <select name="4_2">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["4_2"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["4_2"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["4_2"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="4_3">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["4_3"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["4_3"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["4_3"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="4_4">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["4_4"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["4_4"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["4_4"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="4_5">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["4_5"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["4_5"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["4_5"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="4_6">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["4_6"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["4_6"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["4_6"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="4_7">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["4_7"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["4_7"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["4_7"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
             </tr>
@@ -608,100 +1728,380 @@
               <td>Friday</td>
               <td>
                 <select name="5_1">
+                <%  if(table["5_1"]=="CS301"){ %>
+                    <option selected="selected" value="CS301">CS301</option>
+                  <%}else{%>
                     <option value="CS301">CS301</option>
+                  <%}%>
+                <%  if(table["5_1"]=="CS303"){%>
+                    <option selected="selected" value="CS303">CS303</option>
+                <%  }else{%>
                     <option value="CS303">CS303</option>
+                <%  }%>
+                <%  if(table["5_1"]=="CS305"){%>
+                    <option selected="selected" value="CS305">CS305</option>
+                <%  }else{%>
                     <option value="CS305">CS305</option>
+                <%  }%>
+                <%  if(table["5_1"]=="CS307"){%>
+                    <option selected="selected" value="CS307">CS307</option>
+                <%  }else{%>
                     <option value="CS307">CS307</option>
+                <%  }%>
+                <%  if(table["5_1"]=="CS309"){%>
+                    <option selected="selected" value="CS309">CS309</option>
+                <%  }else{%>
                     <option value="CS309">CS309</option>
+                <%  }%>
+                <%  if(table["5_1"]=="Elective"){%>
+                    <option selected="selected" value="Elective">Elective</option>
+                <%  }else{%>
                     <option value="Elective">Elective</option>
+                <%  }%>
+                <%  if(table["5_1"]=="CS341"){%>
+                    <option selected="selected" value="CS341">CS341</option>
+                <%  }else{%>
                     <option value="CS341">CS341</option>
+                <%  }%>
+                <%  if(table["5_1"]=="CS331"){%>
+                    <option selected="selected" value="CS331">CS331</option>
+                <%  }else{%>
                     <option value="CS331">CS331</option>
+                <%  }%>
+                <%  if(table["5_1"]=="CS333"){%>
+                    <option selected="selected" value="CS333">CS333</option>
+                <%  }else{%>
                     <option value="CS333">CS333</option>
+                <%  }%>
+                <%  if(table["5_1"]=="Free"){%>
+                    <option selected="selected" value="Free">Free</option>
+                <%  }else{%>
                     <option value="Free">Free</option>
+                <%  }%>
                 </select>
               </td>
               <td>
                 <select name="5_2">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["5_2"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["5_2"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["5_2"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="5_3">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["5_3"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["5_3"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["5_3"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="5_4">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["5_4"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["5_4"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["5_4"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="5_5">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["5_5"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["5_5"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["5_5"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="5_6">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["5_6"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["5_6"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["5_6"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
               <td>
                 <select name="5_7">
-                    <option value="CS301">CS301</option>
-                    <option value="CS303">CS303</option>
-                    <option value="CS305">CS305</option>
-                    <option value="CS307">CS307</option>
-                    <option value="CS309">CS309</option>
-                    <option value="Elective">Elective</option>
-                    <option value="CS341">CS341</option>
-                    <option value="CS331">CS331</option>
-                    <option value="CS333">CS333</option>
-                    <option value="Free">Free</option>
+                  <%  if(table["5_7"]=="CS301"){ %>
+                      <option selected="selected" value="CS301">CS301</option>
+                    <%}else{%>
+                      <option value="CS301">CS301</option>
+                    <%}%>
+                  <%  if(table["5_7"]=="CS303"){%>
+                      <option selected="selected" value="CS303">CS303</option>
+                  <%  }else{%>
+                      <option value="CS303">CS303</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="CS305"){%>
+                      <option selected="selected" value="CS305">CS305</option>
+                  <%  }else{%>
+                      <option value="CS305">CS305</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="CS307"){%>
+                      <option selected="selected" value="CS307">CS307</option>
+                  <%  }else{%>
+                      <option value="CS307">CS307</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="CS309"){%>
+                      <option selected="selected" value="CS309">CS309</option>
+                  <%  }else{%>
+                      <option value="CS309">CS309</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="Elective"){%>
+                      <option selected="selected" value="Elective">Elective</option>
+                  <%  }else{%>
+                      <option value="Elective">Elective</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="CS341"){%>
+                      <option selected="selected" value="CS341">CS341</option>
+                  <%  }else{%>
+                      <option value="CS341">CS341</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="CS331"){%>
+                      <option selected="selected" value="CS331">CS331</option>
+                  <%  }else{%>
+                      <option value="CS331">CS331</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="CS333"){%>
+                      <option selected="selected" value="CS333">CS333</option>
+                  <%  }else{%>
+                      <option value="CS333">CS333</option>
+                  <%  }%>
+                  <%  if(table["5_7"]=="Free"){%>
+                      <option selected="selected" value="Free">Free</option>
+                  <%  }else{%>
+                      <option value="Free">Free</option>
+                  <%  }%>
                 </select>
               </td>
             </tr>
