@@ -7,6 +7,7 @@ var JSAlert = require("js-alert");
 var schedule = require('node-schedule');
 var prependFile = require('prepend-file');
 var cron = require('node-cron');
+var session = require('client-sessions');
 app.use(bodyParser.urlencoded({ extended: true }));
 var uid;
 var absent={};
@@ -14,7 +15,7 @@ var new_absent={};
 var pass;
 var timetable_read={};
 var daily_timetable=[];
-var glo_id;
+// var req.session.user="";
 var inten_empty={};
 var intent_empty_string="none";
 var counter=0;
@@ -29,7 +30,7 @@ var per_arr=[];
 var bun_arr=[];
 var toatt_arr=[];
 // var day_att_counter=0;
-app.set('port',(process.env.PORT || 5000));
+// app.set('port',());
 var uid_list=["U1703137","U1703138","U1703139","U1703140","U1703141","U1703142","U1703143","U1703144","U1703145","U1703146","U1703147","U1703148","U1703149","U1703150","U1703151","U1703152","U1703153","U1703154","U1703155","U1703156","U1703157","U1703158","U1703159","U1703160","U1703161","U1703162","U1703163","U1703164","U1703165","U1703166","U1703167","U1703168","U1703169","U1703170","U1703171","U1703172","U1703173","U1703174","U1703175","U1703176","U1703177","U1703178","U1703179","U1703180","U1703181","U1703182","U1703183","U1703184","U1703185","U1703186","U1703187","U1703188","U1703189","U1703190","U1703191","U1703192","U1703193","U1703194","U1703195","U1703196","U1703197","U1703198","U1703199","U1703200","U1703201","U1703202","U1703203"]
 var auth={
 	'U1703137':{"name":"MOHAMED AIMAN","au_uid":"U1703137","au_pass":"17833","au_class":"S5-CSE-GAMMA"},
@@ -104,6 +105,13 @@ var week=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("styles"));
 
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
+
 var d=new Date();
 console.log("INITIAL"+d);
 var day=week[d.getDay()];
@@ -161,6 +169,9 @@ app.get("/login",function(req,res){
   res.render('login.ejs');
 });
 app.get("/home",function(req,res){
+	if(req.session.user==""){
+		res.redirect('login');
+	}else{
 	const fs = require('fs');
 	fs.readFile('data/checkbox.txt', 'utf-8', (err, data) => {
 		if (err) throw err;
@@ -170,23 +181,28 @@ app.get("/home",function(req,res){
 				if (err) throw err;
 				timetable_read=JSON.parse(data1)
 
-				res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+				res.render('profile.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 			});
 		}else{
 			fs.readFile('data/timetable.txt', 'utf-8', (err, data1) => {
 			if (err) throw err;
 			timetable_read=JSON.parse(data1)
-			res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+			res.render('profile.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 			});
 	}
 	});
+}
 });
 app.get("/logout",function(req,res){
-	glo_id="";
+	req.session.user="";
 	res.redirect("/login");
 })
 app.get("/instructions",function(req,res){
-	res.render('instructions.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class});
+	if(req.session.user==""){
+		res.redirect('login');
+	}else{
+	res.render('instructions.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class});
+}
 });
 app.post("/workday",function(req,res){
 	if(d.getDay()==0 || d.getDay()==6){
@@ -234,6 +250,9 @@ app.post('/edittable',function(req,res){
 	res.redirect('/home');
 });
 app.get("/timetable",function(req,res){
+	if(req.session.user==""){
+		res.redirect('login');
+	}else{
 	const fs = require('fs');
 	fs.readFile('data/timetable.txt', 'utf-8', (err, data) => {
 		if (err) throw err;
@@ -241,8 +260,9 @@ app.get("/timetable",function(req,res){
 		console.log("READ FILE");
 	});
 	setTimeout(function() {
-		res.render('ttable.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,table:timetable_read});
+		res.render('ttable.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,table:timetable_read});
 }, 3000);
+}
 });
 app.post("/timetable",function(req,res){
 	const fs = require('fs');
@@ -272,23 +292,26 @@ app.post("/timetable",function(req,res){
 	fs.writeFile('data/timetable.txt', JSON.stringify(req.body, null, 2) ,function(err,result){
 		console.log(" TIMETABLE WRITTEN");
 	});
-	res.render('ttable.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,table:req.body});
+	res.render('ttable.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,table:req.body});
 });
 app.get("/summary",function(req,res){
+	if(req.session.user==""){
+		res.redirect('login');
+	}else{
 	const fs = require('fs');
 	fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
 		if (err) throw err;
 		summary=JSON.parse(data)
 		console.log(summary);
-		res.render('summary.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,sumarr:summary});
+		res.render('summary.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,sumarr:summary});
 	});
 
-
+}
 });
 app.post("/home",function(req,res){
   uid = req.body.user;
   pass = req.body.pass;
-	glo_id=uid;
+	// req.session.user=uid;
   var counter=0;
   for(var i=0;i<uid_list.length;i++){
     if(uid_list[i]===uid){
@@ -298,6 +321,7 @@ app.post("/home",function(req,res){
   }
   if(counter>0){
     if(auth[uid].au_uid===uid && auth[uid].au_pass===pass){
+				req.session.user = uid;
         console.log("Login Success " + auth[uid].name);
         (async () => {
           const browser = await puppeteer.launch({ headless: true , args: ['--no-sandbox', '--disable-setuid-sandbox']});
@@ -433,7 +457,7 @@ app.post("/home",function(req,res){
 														toatt_arr.push(att_count);
 													}
 													console.log(bun_arr);
-													res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+													res.render('profile.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 												});
 											});
 											//=========================================
@@ -531,7 +555,7 @@ app.post("/home",function(req,res){
 																bun_arr.push(bunk_count);
 																toatt_arr.push(att_count);
 															}
-															res.render('profile.ejs',{stud_name:auth[glo_id].name , class_name:auth[glo_id].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+															res.render('profile.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 												});
 											});
 										});
@@ -794,8 +818,8 @@ app.post("/home",function(req,res){
 		},{
 			timeZone:'Asia/Kolkata'
 		});
+// app.get('port')
 
-
-app.listen(app.get('port'),function(){
+app.listen(process.env.PORT || 5000,function(){
   console.log("Server Started");
 })
