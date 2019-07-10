@@ -125,6 +125,11 @@ var current_date=d_1+"-"+d_2+"-"+d_3;
 
 function dateupdate(){
 	d=new Date();
+	day=week[d.getDay()];
+	d_1=d.getDate().toString();
+	d_2=month[d.getMonth()];
+	d_3=d.getFullYear().toString();
+	current_date=d_1+"-"+d_2+"-"+d_3;
 }
 //add the below code inside the above function during final submit
 	console.log("INSIDE DATE UPDATE");
@@ -191,7 +196,9 @@ app.post("/home",function(req,res){
   if(counter>0){
     if(auth[uid].au_uid===uid && auth[uid].au_pass===pass){
 				req.session.user = uid;
-        console.log("Login Success " + auth[uid].name);
+				var today = new Date();
+				var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        console.log("Login Success " + auth[uid].name+" " + time);
         (async () => {
           const browser = await puppeteer.launch({ headless: true , args: ['--no-sandbox', '--disable-setuid-sandbox']});
           const page = await browser.newPage();
@@ -225,16 +232,15 @@ app.post("/home",function(req,res){
 						const fs = require('fs');
 						var link='absent/'+uid+'.txt';
 						fs.writeFile(link, JSON.stringify(absent, null, 2) ,function(err,result){
-							console.log("WRITTEN");
+							console.log("ABSENT DATA WRITTEN TO FILE");
 							fs.readFile('data/checkbox.txt', 'utf-8', (err, data) => {
 								if (err) throw err;
 								var chkbox=JSON.parse(data)
-								console.log("READ FILE");
 								if(Object.keys(chkbox).length==0){
 									fs.readFile('data/timetable.txt', 'utf-8', (err, data1) => {
 										if (err) throw err;
 										timetable_read=JSON.parse(data1)
-										console.log("READ FILE");
+										// console.log("READ FILE");
 										fs.readFile('data/daytable.txt', 'utf-8', (err, data2) => {
 											if (err) throw err;
 											var day_table=JSON.parse(data2)
@@ -259,7 +265,7 @@ app.post("/home",function(req,res){
 												sum_arr.push(count_331);
 												sum_arr.push(count_333);
 												sum_arr.push(count_341);
-												console.log(sum_arr);
+												// console.log(sum_arr);
 												var link='absent/'+"U1703143"+'.txt';
 												fs.readFile(link, 'utf-8', (err, data4) => {
 													if (err) throw err;
@@ -281,14 +287,14 @@ app.post("/home",function(req,res){
 													abs_arr.push(a_count_331);
 													abs_arr.push(a_count_333);
 													abs_arr.push(a_count_341);
-													console.log(abs_arr);
+													// console.log(abs_arr);
 													for(var i=0;i<9;i++){
 														var temp_val = sum_arr[i]-abs_arr[i];
 														var temp_va= temp_val/sum_arr[i];
 														var temp_v=temp_va*100;
 														per_arr.push(temp_v.toFixed(2));
 													}
-													console.log(per_arr);
+													// console.log(per_arr);
 													for(var i=0;i<9;i++){
 														var loop_temp_sum=sum_arr[i];
 														var loop_temp_abs=abs_arr[i];
@@ -325,7 +331,7 @@ app.post("/home",function(req,res){
 														bun_arr.push(bunk_count);
 														toatt_arr.push(att_count);
 													}
-													console.log(bun_arr);
+													// console.log(bun_arr);
 													res.render('profile.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 												});
 											});
@@ -333,11 +339,11 @@ app.post("/home",function(req,res){
 
 									});
 								});
-							}else{
+							}else{ //Else condition is necessary, otherwise on entering home route from login, the toggle button will be always turned OFF (tried it)
 										fs.readFile('data/timetable.txt', 'utf-8', (err, data1) => {
 										if (err) throw err;
 										timetable_read=JSON.parse(data1)
-										console.log("READ FILE");
+										// console.log("READ FILE");
 												fs.readFile('data/daytable.txt', 'utf-8', (err, data2) => {
 													if (err) throw err;
 													var day_table=JSON.parse(data2)
@@ -361,7 +367,7 @@ app.post("/home",function(req,res){
 														sum_arr.push(count_331);
 														sum_arr.push(count_333);
 														sum_arr.push(count_341);
-														console.log(sum_arr);
+														// console.log(sum_arr);
 														var link='absent/'+"U1703143"+'.txt';
 														fs.readFile(link, 'utf-8', (err, data4) => {
 															if (err) throw err;
@@ -383,14 +389,14 @@ app.post("/home",function(req,res){
 															abs_arr.push(a_count_331);
 															abs_arr.push(a_count_333);
 															abs_arr.push(a_count_341);
-															console.log(abs_arr);
+															// console.log(abs_arr);
 															for(var i=0;i<9;i++){
 																var temp_val = sum_arr[i]-abs_arr[i];
 																var temp_va= temp_val/sum_arr[i];
 																var temp_v=temp_va*100;
 																per_arr.push(temp_v.toFixed(2));
 															}
-															console.log(per_arr);
+															// console.log(per_arr);
 															for(var i=0;i<9;i++){
 																var loop_temp_sum=sum_arr[i];
 																var loop_temp_abs=abs_arr[i];
@@ -484,8 +490,12 @@ app.post("/home",function(req,res){
 		}
 		});
 		app.get("/logout",function(req,res){
+			var t=auth[req.session.user].name;
 			req.session.reset();
 			res.redirect("/login");
+			var today = new Date();
+			var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+			console.log("Logout Successful "+t+" "+time);
 		})
 		app.get("/instructions",function(req,res){
 			if(!req.session.user){
@@ -495,16 +505,25 @@ app.post("/home",function(req,res){
 			}
 
 		});
+
+
+		//ROUTE ASSOCIATED WITH CHECKBOX
 		app.post("/workday",function(req,res){
-			if(d.getDay()==0 || d.getDay()==6){
-				intent_empty_string="";
-			}
+			// if(d.getDay()==0 || d.getDay()==6){
+			// 	intent_empty_string="";
+			// }
 			const fs = require('fs');
 			fs.writeFile('data/checkbox.txt', JSON.stringify(req.body, null, 2) ,function(err,result){
-				console.log(" TIMETABLE WRITTEN");
+				if(Object.keys(req.body).length==0){
+					console.log("CHECKBOX UNTICKED");
+				}else{
+					console.log("CHECKBOX TICKED")
+				}
 			});
 			res.redirect('/home');
 		});
+
+
 		app.post("/ttable_alter",function(req,res){
 			console.log(req.body);
 			if(req.body.yesno==='No'){
@@ -513,16 +532,18 @@ app.post("/home",function(req,res){
 				intent_empty_string="none"
 				counter=1;
 				res.redirect('/home');
+				console.log("Change in Day's Timetable");
 			}else if(req.body.yesno==='Yes'){
 				counter=0;
 				thk_res="Thank You for your response"
 				alter_table="none";
 				intent_empty_string="none"
 				res.redirect('/home');
+				console.log("No Change in Day's Timetable");
 			}
 		});
 
-
+		//Both the routes below serves the purpose of getting the schedule of the day if the normal timetable was not followed correctly
 		app.post("/ttable_alter_absent",function(req,res){
 			alter_table="";
 			thk_res="";
@@ -579,7 +600,7 @@ app.post("/home",function(req,res){
 			fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
 				if (err) throw err;
 				summary=JSON.parse(data)
-				console.log(summary);
+				// console.log(summary);
 				res.render('summary.ejs',{stud_name:auth[req.session.user].name , class_name:auth[req.session.user].au_class,sumarr:summary});
 			});
 		}
@@ -601,19 +622,8 @@ app.post("/home",function(req,res){
 		}
 		});
 
-		//COMMENT THIS OUT LATER BEFORE DEPLOYMENT
-		var currentD = new Date();
-		// var resetDate = new Date();
-		// resetDate.setHours(3,21,0);
-		var startHappyHourD = new Date();
-		startHappyHourD.setHours(0,00,0); // 6.30 pm
-		var endHappyHourD = new Date();
-		endHappyHourD.setHours(23,55,0); // 11.55 pm
-		if(currentD >= startHappyHourD && currentD < endHappyHourD ){
-    		intent_empty_string="";
-		}else{
-				intent_empty_string="none";
-		}
+
+
 
 		//===========================================================================
 		var resetTime = new Date();
@@ -631,8 +641,8 @@ app.post("/home",function(req,res){
 						if (err) throw err;
 						var sum=JSON.parse(data)
 						if(Object.keys(chkbox).length!=0){
-								console.log("INSIDE First Loop)");
-									if(counter==0){ //change later to 0
+								console.log("Checkbox Ticked");
+									if(counter==0){ //No change in day's timetable
 											if(d.getDay()==1){
 												empty.push(current_date);
 												empty.push("Monday");
@@ -648,13 +658,15 @@ app.post("/home",function(req,res){
 												function madedelay(){
 													summary["Date"]=empty[0];
 													summary["Day"]=empty[1];
-													summary["p1"]=ftt["1_1"];
+													summary["p1"]=ftt["1_1"]; //Could have used the above temp array. But nevermind.
 													summary["p2"]=ftt["1_2"];
 													summary["p3"]=ftt["1_3"];
 													summary["p4"]=ftt["1_4"];
 													summary["p5"]=ftt["1_5"];
 													summary["p6"]=ftt["1_6"];
 													summary["p7"]=ftt["1_7"];
+													// console.log("SUMMARY");
+													// console.log(summary);
 													sum.unshift(summary);
 													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
@@ -773,11 +785,11 @@ app.post("/home",function(req,res){
 												}
 												setTimeout(madedelay,5000);
 											}
-								}else if(counter==1){ //unchecked
+								}else if(counter==1){ //Change in day's table
 									fs.readFile('data/changed_table.txt', 'utf-8', (err, data) => {
 										if (err) throw err;
 										ftt=JSON.parse(data)
-										console.log("READ FILE");
+										console.log("Read data from changed table");
 									});
 									function madedelay(){
 										var c_name=d.getDay();
@@ -806,31 +818,52 @@ app.post("/home",function(req,res){
 	});
 }
 
+//COMMENT THIS OUT LATER BEFORE DEPLOYMENT
+// function dailytablecheck(){ //FUNCTION USED to be called by cron job daily once
+// 	var currentD = new Date();
+// 	var startHappyHourD = new Date();
+// 	startHappyHourD.setHours(12,00,0); // 6.30 pm
+// 	var endHappyHourD = new Date();
+// 	endHappyHourD.setHours(23,55,0); // 11.55 pm
+// 	if(currentD >= startHappyHourD && currentD < endHappyHourD ){
+// 			intent_empty_string="";
+// 	}else{
+// 			intent_empty_string="none";
+// 	}
+// }
+
 
 		// var c_date = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
 		// var daily_c_value = new Date();
 		// daily_c_value.setHours(11,22,0);
 		// console.log(daily_c_value);
-		cron.schedule('00 00 01 * * 0-6', () => {
+		cron.schedule('00 15 00 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:15
 			counter=0;
 			dateupdate();
-  		console.log('running a task every minute');
-
+  		console.log('Date Update at 12:15 AM');
+			console.log(current_date);
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 15 16 * * 0-6', () => {
+		cron.schedule('00 00 23 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
 			loop();
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 36 16 * * 0-6', () => {
-			intent_empty_string=""
+		cron.schedule('00 30 16 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
+			// dailytablecheck();
+			intent_empty_string="";
 			thk_res=""
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-// app.get('port')
+		cron.schedule('00 30 22 * * 0-6', () => { //CRON JOB FOR DISABLE OPTIONS TO CHANGE DAY'S TIMETABLE 22:30
+			// dailytablecheck();
+			intent_empty_string="none";
+			thk_res=""
+		},{
+			timeZone:'Asia/Kolkata'
+		});
 
 app.listen(process.env.PORT || 5000,function(){
   console.log("Server Started");
