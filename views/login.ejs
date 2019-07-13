@@ -36,7 +36,8 @@
             <input id="chk_bxk" onclick="show_pass()" type="checkbox" name="check" >
             <label for="chk_bxk">Show Password</label>
           </div>
-          <p hidden>Invalid Credentials..!!</p>
+          <p id="demo-password" style="display:<%=in_pass%>">Invalid Password.!</p>
+          <p id="demo-password" style="display:<%=in_cred%>">Invalid Credentials..!!</p>
           <input class="input_button ripple" onclick="phs()" type="submit" value="LOGIN">
 
         </form>

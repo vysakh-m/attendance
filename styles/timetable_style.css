@@ -111,3 +111,6 @@ h6{
 .navbar-right {
   float: right!important;
 }
+.gap{
+  margin-top: 15px;
+}

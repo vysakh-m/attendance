@@ -181,12 +181,13 @@ app.get("/",function(req,res){
 
 });
 app.get("/login",function(req,res){
-  res.render('login.ejs');
+  res.render('login.ejs',{in_cred:"none",in_pass:"none"});
 });
 
 app.post("/home",function(req,res){
   uid = req.body.user;
   pass = req.body.pass;
+	uid=uid.toUpperCase();
 	// req.session.user=uid;
   var counter=0;
   for(var i=0;i<uid_list.length;i++){
@@ -446,9 +447,11 @@ app.post("/home",function(req,res){
           await browser.close();
         })();
       }else{
+				res.render('login.ejs',{in_cred:"none",in_pass:""});
         console.log("Invalid Password");
       }
   }else{
+		res.render('login.ejs',{in_cred:"",in_pass:"none"});
     console.log("Invalid UID");
 
   }
