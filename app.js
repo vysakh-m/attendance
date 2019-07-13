@@ -130,8 +130,7 @@ function dateupdate(){
 	d_2=month[d.getMonth()];
 	d_3=d.getFullYear().toString();
 	current_date=d_1+"-"+d_2+"-"+d_3;
-}
-//add the below code inside the above function during final submit
+	//======
 	console.log("INSIDE DATE UPDATE");
 	if(d.getDay()==0 || d.getDay()==6){
 		const fs = require('fs');
@@ -165,6 +164,9 @@ function dateupdate(){
 			daily_timetable.push(temp);
 		}
 	}
+}
+//add the below code inside the above function during final submit
+
 	const fs = require('fs');
 	fs.writeFile('data/daytable.txt', JSON.stringify(daily_timetable, null, 2) ,function(err,result){
 		console.log("DAY'S TIMETABLE WRITTEN");
@@ -509,9 +511,6 @@ app.post("/home",function(req,res){
 
 		//ROUTE ASSOCIATED WITH CHECKBOX
 		app.post("/workday",function(req,res){
-			// if(d.getDay()==0 || d.getDay()==6){
-			// 	intent_empty_string="";
-			// }
 			const fs = require('fs');
 			fs.writeFile('data/checkbox.txt', JSON.stringify(req.body, null, 2) ,function(err,result){
 				if(Object.keys(req.body).length==0){
@@ -665,8 +664,6 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["1_5"];
 													summary["p6"]=ftt["1_6"];
 													summary["p7"]=ftt["1_7"];
-													// console.log("SUMMARY");
-													// console.log(summary);
 													sum.unshift(summary);
 													fs.writeFile('data/summary.txt', JSON.stringify(sum, null, 2) ,function(err,result){
 													});
@@ -837,7 +834,7 @@ app.post("/home",function(req,res){
 		// var daily_c_value = new Date();
 		// daily_c_value.setHours(11,22,0);
 		// console.log(daily_c_value);
-		cron.schedule('00 15 00 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:15
+		cron.schedule('00 18 13 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:15
 			counter=0;
 			dateupdate();
   		console.log('Date Update at 12:15 AM');
@@ -850,10 +847,16 @@ app.post("/home",function(req,res){
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 30 16 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
+		cron.schedule('00 30 13 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
 			// dailytablecheck();
-			intent_empty_string="";
-			thk_res=""
+			fs.readFile('data/checkbox.txt', 'utf-8', (err, data) => {
+				if (err) throw err;
+				var chkbox=JSON.parse(data)
+				if(Object.keys(chkbox).length!=0){
+					intent_empty_string="";
+					thk_res=""
+				}
+			});
 		},{
 			timeZone:'Asia/Kolkata'
 		});
