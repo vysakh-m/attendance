@@ -2,6 +2,17 @@
   {
     "Date": "8-Jul-2019",
     "Day": "Monday",
+    "p1": "CS331",
+    "p2": "Elective",
+    "p3": "Elective",
+    "p4": "Elective",
+    "p5": "Elective",
+    "p6": "Elective",
+    "p7": "Elective"
+  },
+  {
+    "Date": "8-Jul-2019",
+    "Day": "Monday",
     "p1": "Free",
     "p2": "CS303",
     "p3": "CS305",
@@ -9,6 +20,17 @@
     "p5": "CS309",
     "p6": "Elective",
     "p7": "CS341"
+  },
+  {
+    "Date": "25-May-2019",
+    "Day": "Saturday",
+    "p1": "CS307",
+    "p2": "CS301",
+    "p3": "CS309",
+    "p4": "CS301",
+    "p5": "CS301",
+    "p6": "CS301",
+    "p7": "CS301"
   },
   {
     "Date": "27-May-2019",
@@ -57,7 +79,7 @@
   {
     "Date": "23-May-2019",
     "Day": "Monday",
-    "p1": "Elective",
+    "p1": "CS333",
     "p2": "CS331",
     "p3": "CS341",
     "p4": "Elective",

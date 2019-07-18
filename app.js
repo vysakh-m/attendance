@@ -29,6 +29,11 @@ var abs_arr=[];
 var per_arr=[];
 var bun_arr=[];
 var toatt_arr=[];
+var active_users=[];
+var active_time=[];
+var login_count={};
+var t_arr=[];
+var change_date="";
 // var day_att_counter=0;
 // app.set('port',());
 var uid_list=["U1703137","U1703138","U1703139","U1703140","U1703141","U1703142","U1703143","U1703144","U1703145","U1703146","U1703147","U1703148","U1703149","U1703150","U1703151","U1703152","U1703153","U1703154","U1703155","U1703156","U1703157","U1703158","U1703159","U1703160","U1703161","U1703162","U1703163","U1703164","U1703165","U1703166","U1703167","U1703168","U1703169","U1703170","U1703171","U1703172","U1703173","U1703174","U1703175","U1703176","U1703177","U1703178","U1703179","U1703180","U1703181","U1703182","U1703183","U1703184","U1703185","U1703186","U1703187","U1703188","U1703189","U1703190","U1703191","U1703192","U1703193","U1703194","U1703195","U1703196","U1703197","U1703198","U1703199","U1703200","U1703201","U1703202","U1703203","U1703204"]
@@ -114,7 +119,15 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
-
+app.use(session({
+  cookieName: 'asession',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+	httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
 var d=new Date();
 console.log("INITIAL"+d);
 var day=week[d.getDay()];
@@ -166,7 +179,7 @@ function dateupdate(){
 	}
 }
 //add the below code inside the above function during final submit
-
+//already done
 	const fs = require('fs');
 	fs.writeFile('data/daytable.txt', JSON.stringify(daily_timetable, null, 2) ,function(err,result){
 		console.log("DAY'S TIMETABLE WRITTEN");
@@ -182,6 +195,151 @@ app.get("/",function(req,res){
 });
 app.get("/login",function(req,res){
   res.render('login.ejs',{in_cred:"none",in_pass:"none"});
+});
+app.get("/admin/login",function(req,res){
+  res.render('adminlogin.ejs',{in_cred:"none"});
+});
+app.get("/admin/logout",function(req,res){
+	if(!req.asession.user){
+		res.redirect('login');
+	}else{
+		req.asession.reset();
+		res.redirect("login");
+		var today = new Date();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		console.log("Admin Logout Successful "+" "+time);
+	}
+});
+app.get("/admin/summary",function(req,res){
+	fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
+		if (err) throw err;
+		summary=JSON.parse(data)
+  res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
+});
+});
+app.post("/admin/changetable",function(req,res){
+	console.log(req.body);
+	fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
+		if (err) throw err;
+		summary=JSON.parse(data);
+		change_date=req.body.change;
+		console.log(req.body);
+		for(var i=0;i<=summary.length-1;i++){
+			if(summary[i]["Date"]==change_date){
+				t_arr.push(summary[i]["Date"]);
+				t_arr.push(summary[i]["Day"]);
+				t_arr.push(summary[i]["p1"]);
+				t_arr.push(summary[i]["p2"]);
+				t_arr.push(summary[i]["p3"]);
+				t_arr.push(summary[i]["p4"]);
+				t_arr.push(summary[i]["p5"]);
+				t_arr.push(summary[i]["p6"]);
+				t_arr.push(summary[i]["p7"]);
+				break;
+			}
+		}
+		console.log(t_arr);
+		res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:""});
+		t_arr=[];
+	});
+});
+app.post("/admin/savechanges",function(req,res){
+	fs.readFile('data/summary.txt', 'utf-8', (err, data) => {
+		if (err) throw err;
+		summary=JSON.parse(data);
+		console.log(req.body)
+		for(var i=0;i<=summary.length-1;i++){
+			if(summary[i]["Date"]==change_date){
+				summary[i]["p1"]=req.body["p1"];
+				summary[i]["p2"]=req.body.p2;
+				summary[i]["p3"]=req.body.p3;
+				summary[i]["p4"]=req.body.p4;
+				summary[i]["p5"]=req.body.p5;
+				summary[i]["p6"]=req.body.p6;
+				summary[i]["p7"]=req.body.p7;
+				break;
+			}
+		}
+		fs.writeFile('data/summary.txt', JSON.stringify(summary, null, 2) ,function(err,result){
+		});
+	res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
+});
+});
+app.get("/admin/home",function(req,res){
+	if(!req.asession.user){
+		res.redirect('login');
+	}else{
+		fs.readFile('data/log_user.txt', 'utf-8', (err, data2) => {
+			if (err) throw err;
+			var u_id="U1703"
+			var count=0;
+			var log_user=JSON.parse(data2);
+			for(var i=137;i<205;i++){
+				if(i==164 || i==166 || i==169){
+					continue;
+				}
+				var u_i_d=u_id+i.toString();
+				login_count[u_i_d]={};
+				login_count[u_i_d].uid=u_i_d;
+				var t=auth[u_i_d].name;
+				login_count[u_i_d].name=t;
+				var regex = new RegExp(t, "g");
+				var count=(data2.match(regex) || []).length;
+				login_count[u_i_d].count=count;
+			}
+
+			fs.writeFile('data/log_count.txt', JSON.stringify(login_count, null, 2) ,function(err,result){
+				console.log("User Name added to Log");
+			});
+			fs.readFile('data/log_time.txt', 'utf-8', (err, data3) => {
+				if (err) throw err;
+				var log_time=JSON.parse(data3);
+				res.render('adminhome.ejs',{log_user:log_user,log_time:log_time,log_count:login_count});
+				});
+			});
+
+	}
+
+});
+
+
+app.post("/admin/home",function(req,res){
+	uid = req.body.user;
+	pass = req.body.pass;
+	if(uid=="admin" && pass=="kava2kaka"){
+		req.asession.user = uid;
+		fs.readFile('data/log_user.txt', 'utf-8', (err, data2) => {
+			if (err) throw err;
+			var u_id="U1703"
+			var count=0;
+			var log_user=JSON.parse(data2);
+			for(var i=137;i<205;i++){
+				if(i==164 || i==166 || i==169){
+					continue;
+				}
+				var u_i_d=u_id+i.toString();
+				login_count[u_i_d]={};
+				login_count[u_i_d].uid=u_i_d;
+				var t=auth[u_i_d].name;
+				login_count[u_i_d].name=t;
+				var regex = new RegExp(t, "g");
+				var count=(data2.match(regex) || []).length;
+				login_count[u_i_d].count=count;
+			}
+
+			fs.writeFile('data/log_count.txt', JSON.stringify(login_count, null, 2) ,function(err,result){
+				console.log("User Name added to Log");
+			});
+			fs.readFile('data/log_time.txt', 'utf-8', (err, data3) => {
+				if (err) throw err;
+				var log_time=JSON.parse(data3);
+				res.render('adminhome.ejs',{log_user:log_user,log_time:log_time,log_count:login_count});
+			});
+		});
+	}else{
+		res.render('adminlogin.ejs',{in_cred:""});
+	}
+
 });
 
 app.post("/home",function(req,res){
@@ -201,6 +359,23 @@ app.post("/home",function(req,res){
 				req.session.user = uid;
 				var today = new Date();
 				var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+				fs.readFile('data/log_user.txt', 'utf-8', (err, data2) => {
+					if (err) throw err;
+					var log_user=JSON.parse(data2);
+					log_user.unshift(auth[uid].name);
+					fs.writeFile('data/log_user.txt', JSON.stringify(log_user, null, 2) ,function(err,result){
+						console.log("User Name added to Log");
+					});
+
+				});
+				fs.readFile('data/log_time.txt', 'utf-8', (err, data3) => {
+					if (err) throw err;
+					var log_time=JSON.parse(data3)
+					log_time.unshift(time);
+					fs.writeFile('data/log_time.txt', JSON.stringify(log_time, null, 2) ,function(err,result){
+						console.log("User Login time added to Log");
+					});
+				});
         console.log("Login Success " + auth[uid].name+" " + time);
         (async () => {
           const browser = await puppeteer.launch({ headless: true , args: ['--no-sandbox', '--disable-setuid-sandbox']});
@@ -210,13 +385,10 @@ app.post("/home",function(req,res){
           await page.type('input[name="Password"]', pass);
           await page.click('input[type="submit"]');
           await page.goto('https://www.rajagiritech.ac.in/stud/ktu/Student/Leave.asp');
-          await page.screenshot({path: 'example.png'});
           await page.evaluate(() => {
           document.querySelector('select[name="code"]').selectedIndex = 3;
           });
           await page.click('input[type="submit"]');
-          await page.screenshot({path: 'example.png'});
-          await page.screenshot({ path: 'fullpage.png', fullPage: true });
           const data = await page.$$eval('table tr td[valign="middle"]', tds => tds.map((td) => {
           return td.innerText;
           }));
@@ -495,12 +667,21 @@ app.post("/home",function(req,res){
 		}
 		});
 		app.get("/logout",function(req,res){
-			var t=auth[req.session.user].name;
-			req.session.reset();
-			res.redirect("/login");
-			var today = new Date();
-			var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-			console.log("Logout Successful "+t+" "+time);
+			if(!req.session.user){
+				res.redirect('login');
+			}else{
+				var index = active_users.indexOf(req.session.user);
+				if (index > -1) {
+	  			active_users.splice(index, 1);
+					active_time.splice(index,1);
+				}
+				var t=auth[req.session.user].name;
+				req.session.reset();
+				res.redirect("/login");
+				var today = new Date();
+				var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+				console.log("Logout Successful "+t+" "+time);
+			}
 		})
 		app.get("/instructions",function(req,res){
 			if(!req.session.user){
@@ -837,11 +1018,30 @@ app.post("/home",function(req,res){
 		// var daily_c_value = new Date();
 		// daily_c_value.setHours(11,22,0);
 		// console.log(daily_c_value);
-		cron.schedule('00 18 13 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:15
+		cron.schedule('20 54 08 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:15
 			counter=0;
 			dateupdate();
   		console.log('Date Update at 12:15 AM');
 			console.log(current_date);
+
+			fs.readFile('data/log_user.txt', 'utf-8', (err, data2) => {
+				if (err) throw err;
+				var log_user=JSON.parse(data2);
+
+				log_user.unshift(current_date);
+				fs.writeFile('data/log_user.txt', JSON.stringify(log_user, null, 2) ,function(err,result){
+					// console.log("User Name added to Log");
+				});
+			});
+			fs.readFile('data/log_time.txt', 'utf-8', (err, data3) => {
+				if (err) throw err;
+				var log_time=JSON.parse(data3)
+				log_time.unshift(" ");
+				fs.writeFile('data/log_time.txt', JSON.stringify(log_time, null, 2) ,function(err,result){
+					// console.log("User Login time added to Log");
+				});
+			});
+
 		},{
 			timeZone:'Asia/Kolkata'
 		});
@@ -863,7 +1063,7 @@ app.post("/home",function(req,res){
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 30 22 * * 0-6', () => { //CRON JOB FOR DISABLE OPTIONS TO CHANGE DAY'S TIMETABLE 22:30
+		cron.schedule('00 32 04 * * 0-6', () => { //CRON JOB FOR DISABLE OPTIONS TO CHANGE DAY'S TIMETABLE 22:30
 			// dailytablecheck();
 			intent_empty_string="none";
 			thk_res=""
