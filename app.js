@@ -670,11 +670,6 @@ app.post("/home",function(req,res){
 			if(!req.session.user){
 				res.redirect('login');
 			}else{
-				var index = active_users.indexOf(req.session.user);
-				if (index > -1) {
-	  			active_users.splice(index, 1);
-					active_time.splice(index,1);
-				}
 				var t=auth[req.session.user].name;
 				req.session.reset();
 				res.redirect("/login");
