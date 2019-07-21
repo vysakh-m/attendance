@@ -36,9 +36,9 @@ var t_arr=[];
 var change_date="";
 var absent_t={};
 const fs=require('fs');
-// var day_att_counter=0;
-// app.set('port',());
-mongoose.connect("mongodb://localhost:27017/rsms_attendance",{useNewUrlParser:true});
+//"mongodb://localhost:27017/rsms_attendance"
+const uri = process.env.MONGODB_URI;
+mongoose.connect(uri,{dbName:'rsms_attendance',useNewUrlParser:true});
 var studSchema=new mongoose.Schema({
 	name:String,
 	au_uid:String,
@@ -464,6 +464,7 @@ app.post("/home",function(req,res){
 			console.log(err);
 			console.log("ERROR in Finding Student Data")
 		}else{
+			console.log(result);
 			stud_db=result[0];
 		  if(counter>0){
 		    if(stud_db.au_uid===uid && stud_db.au_pass===pass){
@@ -1434,7 +1435,7 @@ app.post("/home",function(req,res){
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('30 19 15 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
+		cron.schedule('00 13 03 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
 			// dailytablecheck();
 			check_data.find({},function(err,result){
 				if(err){
