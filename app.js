@@ -24,11 +24,6 @@ var thk_res="";
 var final_timetable={};
 var summary={};
 var c=0;
-var sum_arr=[];
-var abs_arr=[];
-var per_arr=[];
-var bun_arr=[];
-var toatt_arr=[];
 var active_users=[];
 var active_time=[];
 var login_count={};
@@ -36,7 +31,7 @@ var t_arr=[];
 var change_date="";
 var absent_t={};
 const fs=require('fs');
-//"mongodb://localhost:27017/rsms_attendance"
+
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{dbName:'rsms_attendance',useNewUrlParser:true});
 var studSchema=new mongoose.Schema({
@@ -97,6 +92,14 @@ var countSchema=new mongoose.Schema({
 		count:String
 	}]
 });
+var bunkboxSchema=new mongoose.Schema({
+	uid:String,
+	abs_arr:[String],
+	sum_arr:[String],
+	per_arr:[String],
+	bun_arr:[String],
+	toatt_arr:[String]
+})
 
 var stud_var=mongoose.model("stud_datas",studSchema);
 var abs_datas=mongoose.model("abs_datas",absentSchema);
@@ -107,7 +110,7 @@ var time_tbl_data=mongoose.model("time_table_datas",timeTableSchema);
 var sumdata=mongoose.model("sum_datas",sumSchema);
 var logdata=mongoose.model("log_datas",logSchema);
 var countdata=mongoose.model("count_datas",countSchema);
-
+var bunkboxdata=mongoose.model("bunk_box_datas",bunkboxSchema);
 
 
 
@@ -570,6 +573,11 @@ app.post("/home",function(req,res){
 										console.log("ERROR in Finding Student Data")
 									}else{
 										var chk = result[0]["state"];
+										var sum_arr=[];
+										var abs_arr=[];
+										var per_arr=[];
+										var bun_arr=[];
+										var toatt_arr=[];
 										if(chk===false){ //NECESSARY ELSE /HOME WOULD NOT LOAD IF CHECKBOX==FALSE
 											//TIMETABLE
 											console.log("TIMETABLE 1")
@@ -683,8 +691,23 @@ app.post("/home",function(req,res){
 																	bun_arr.push(bunk_count);
 																	toatt_arr.push(att_count);
 																}
-																// console.log(bun_arr);
-																res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+																//BUNKBOXWRITE
+																bunkboxdata.find({uid:uid}).deleteMany(function(err){
+																if(err){
+																	console.log(err);
+																}else{
+																	var t5_data = new bunkboxdata({uid:uid,abs_arr:abs_arr,sum_arr:sum_arr,per_arr:per_arr,bun_arr:bun_arr,toatt_arr:toatt_arr});
+																	t5_data.save(function(err){
+																	if(err){
+																		console.log("ERROR")
+																	}else{
+																		res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+																	}
+																	});
+																}
+																});
+
+
 														}
 														});
 													}
@@ -800,7 +823,22 @@ app.post("/home",function(req,res){
 																			bun_arr.push(bunk_count);
 																			toatt_arr.push(att_count);
 																		}
-																		res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+																		//BUNKBOXWRITE
+																		bunkboxdata.find({uid:uid}).deleteMany(function(err){
+																		if(err){
+																			console.log(err);
+																		}else{
+																			var t5_data = new bunkboxdata({uid:uid,abs_arr:abs_arr,sum_arr:sum_arr,per_arr:per_arr,bun_arr:bun_arr,toatt_arr:toatt_arr});
+																			t5_data.save(function(err){
+																			if(err){
+																				console.log("ERROR")
+																			}else{
+																				res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+																			}
+																			});
+																		}
+																		});
+
 																}
 														});
 													}
@@ -865,7 +903,20 @@ app.post("/home",function(req,res){
 											console.log(err);
 										}else{
 											timetable_read=result[0];
+											//BUNKBOX
+											bunkboxdata.find({uid:req.session.user},function(err,result){
+											if(err){
+												console.log(err);
+												console.log("ERROR in Finding Student Data")
+											}else{
+												var abs_arr=result[0].abs_arr;
+												var sum_arr=result[0].sum_arr;
+												var per_arr=result[0].per_arr;
+												var bun_arr=result[0].bun_arr;
+												var toatt_arr=result[0].toatt_arr;
 											res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+										}
+									});
 								}
 							});
 						}else{
@@ -875,9 +926,21 @@ app.post("/home",function(req,res){
 									console.log(err);
 								}else{
 									timetable_read=result[0];
-									console.log(timetable_read);
-									console.log(daily_timetable);
+									//BUNKBOX
+									bunkboxdata.find({uid:req.session.user},function(err,result){
+									if(err){
+										console.log(err);
+										console.log("ERROR in Finding Student Data")
+									}else{
+										abs_arr=result[0].abs_arr;
+										sum_arr=result[0].sum_arr;
+										per_arr=result[0].per_arr;
+										bun_arr=result[0].bun_arr;
+										toatt_arr=result[0].toatt_arr;
 									res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:daily_timetable,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
+								}
+							});
+
 								}
 							});
 					}
