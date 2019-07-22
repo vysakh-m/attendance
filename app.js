@@ -9,6 +9,7 @@ var prependFile = require('prepend-file');
 var cron = require('node-cron');
 var session = require('client-sessions');
 var mongoose = require('mongoose');
+var http = require("http");
 app.use(bodyParser.urlencoded({ extended: true }));
 var uid;
 var absent=[];
@@ -31,6 +32,14 @@ var t_arr=[];
 var change_date="";
 var absent_t={};
 const fs=require('fs');
+
+
+setInterval(function() {
+		var today = new Date();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		http.get("http://attdemo.herokuapp.com/");
+    console.log("Ping at "+time);
+}, 3000000);
 
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{dbName:'rsms_attendance',useNewUrlParser:true});
