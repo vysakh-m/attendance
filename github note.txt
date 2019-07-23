@@ -1,0 +1,9 @@
+COMMIT : 41b9ccefd93922d75e6149005febecbca4f88f69 dated 30/07/2019 : MAJOR UPDATE! SHIFTED TO MONGODB
+is actually commited on 22/07/2019 
+
+PARENT COMMIT
+f01990e06174dd0d43466d998525a8571b288a97 dated 18/07/2019 : Splice function removed from logout
+
+CHILD COMMIT
+890c732d9f54380fb17c23cabe040c2930f95202 dated 22/07/2019 : Secured DB Pass for Server Login
+

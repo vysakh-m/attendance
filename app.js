@@ -39,7 +39,7 @@ setInterval(function() {
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 		http.get("http://attdemo.herokuapp.com/");
     console.log("Ping at "+time);
-}, 3000000);
+}, 1500000);
 
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{dbName:'rsms_attendance',useNewUrlParser:true});
@@ -373,8 +373,13 @@ app.post("/admin/savechanges",function(req,res){
 			}
 		}
 		summaryUpdate(summary);
-	// res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
-	res.redirect("/admin/summary");
+		//Delay required for the above function to write to DB. Without it, /admin/summary will be called even without updating the summary value
+		setTimeout(function() {
+			// res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
+  			res.redirect("/admin/summary");
+		}, 2000);
+
+
 }
 });
 });
