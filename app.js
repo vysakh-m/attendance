@@ -37,10 +37,10 @@ var pingval=0;
 
 setInterval(function() {
 		if(pingval%6==0){
+			var today = new Date();
+			var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 			console.log("Ping at "+time);
 		}
-		var today = new Date();
-		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 		http.get("http://attdemo.herokuapp.com/");
 		pingval++;
 }, 300000);
@@ -157,7 +157,6 @@ app.use(session({
   ephemeral: true
 }));
 var d=new Date();
-console.log("INITIAL"+d);
 var day=week[d.getDay()];
 var d_1=d.getDate().toString();
 var d_2=month[d.getMonth()];
@@ -351,7 +350,6 @@ app.post("/admin/changetable",function(req,res){
 	}else{
 		var summary=result[0]["sumVal"];
 		change_date=req.body.change;
-		console.log(req.body);
 		for(var i=0;i<=summary.length-1;i++){
 			if(summary[i]["Date"]==change_date){
 				t_arr.push(summary[i]["Date"]);
@@ -382,14 +380,21 @@ app.post("/admin/savechanges",function(req,res){
 		var summary=result[0]["sumVal"];
 		for(var i=0;i<=summary.length-1;i++){
 			if(summary[i]["Date"]==change_date){
-				summary[i]["p1"]=req.body["p1"];
-				summary[i]["p2"]=req.body.p2;
-				summary[i]["p3"]=req.body.p3;
-				summary[i]["p4"]=req.body.p4;
-				summary[i]["p5"]=req.body.p5;
-				summary[i]["p6"]=req.body.p6;
-				summary[i]["p7"]=req.body.p7;
-				break;
+				if(req.body.save==="SAVE"){
+					summary[i]["p1"]=req.body["p1"];
+					summary[i]["p2"]=req.body.p2;
+					summary[i]["p3"]=req.body.p3;
+					summary[i]["p4"]=req.body.p4;
+					summary[i]["p5"]=req.body.p5;
+					summary[i]["p6"]=req.body.p6;
+					summary[i]["p7"]=req.body.p7;
+					break;
+				}else if(req.body.save=="DELETE"){
+					console.log("DELETED SUMMARY ENTRY");
+					summary.splice(i,1);
+					break;
+				}
+
 			}
 		}
 		summaryUpdate(summary);
@@ -411,7 +416,7 @@ app.get("/admin/home",function(req,res){
 				logdata.find({},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
+					console.log("ERROR in Finding Student Log Data")
 				}else{
 					var log_temp=result[0];
 					var log_user=log_temp["log_user"];
@@ -442,7 +447,6 @@ app.get("/admin/home",function(req,res){
 							var count=(data2.match(regex) || []).length;
 							login_count.count=count;
 							log_count_arr.push(login_count);
-							console.log(log_count_arr);
 							k++;
 				}
 				//WRITING LOG
@@ -491,7 +495,6 @@ app.post("/home",function(req,res){
   var counter=0;
   for(var i=0;i<uid_list.length;i++){
     if(uid_list[i]===uid){
-      console.log(uid_list[i]);
       counter++;
     }
   }
@@ -500,7 +503,6 @@ app.post("/home",function(req,res){
 			console.log(err);
 			console.log("ERROR in Finding Student Data")
 		}else{
-			console.log(result);
 			stud_db=result[0];
 		  if(counter>0){
 		    if(stud_db.au_uid===uid && stud_db.au_pass===pass){
@@ -534,12 +536,6 @@ app.post("/home",function(req,res){
 								});
 					}
 					});
-
-
-
-
-
-
 		        console.log("Login Success " + stud_db.name+" " + time);
 		        (async () => {
 		          const browser = await puppeteer.launch({ headless: true , args: ['--no-sandbox', '--disable-setuid-sandbox', "--proxy-server='direct://'", '--proxy-bypass-list=*']});
@@ -553,12 +549,13 @@ app.post("/home",function(req,res){
 		          document.querySelector('select[name="code"]').selectedIndex = 3;
 		          });
 		          await page.click('input[type="submit"]');
-							await page.screenshot({path: 'scrap_target.png'}); //Necessary to make the page load fully for screenshot, so scraping works perfectly
+							//await page.screenshot({path: 'scrap_target.png'}); //Necessary to make the page load fully for screenshot, so scraping works perfectly
+							//instead of above statement waitfor function used
+							await page.waitFor(2000);
 		          const data = await page.$$eval('table tr td[valign="middle"]', tds => tds.map((td) => {
 		          return td.innerText;
 		          }));
 		          data.splice(0,9);
-							console.log(data);
 							var i=0;
 							var absent=[];
 		          while(data.length!=0){
@@ -568,30 +565,24 @@ app.post("/home",function(req,res){
 								absent_t.uid=uid;
 		            absent_t.date=key;
 		            absent_t.value=values;
-								console.log(absent_t);
 								absent.push(absent_t);
 								absent_t={};
 								i++
 		          }
-							console.log(absent);
 
 
 							function explode(){
 								//DELETE ALL ABSENT ENTRIES OF USER
-								console.log("DELETE ALL ABSENT ENTRIES OF USER");
 								abs_datas.find({ uid:uid }).deleteMany(function(err){
 									if(err){
 										console.log(err);
 									}else{
 										//ADD ALL THE ABSENT ENTRIES OF USER
-										console.log("ADD ALL THE ABSENT ENTRIES OF USER");
 										absent.forEach(function(arrayItem) {
 												var s_data = new abs_datas(arrayItem);
 												s_data.save(function(err){
 													if(err){
 														console.log("ERROR")
-													}else{
-														console.log(arrayItem);
 													}
 												});
 										});
@@ -599,11 +590,9 @@ app.post("/home",function(req,res){
 								});
 
 								//CHECKBOX
-								console.log("CHECKBOX");
 								check_data.find({},function(err,result){
 									if(err){
 										console.log(err);
-										console.log("ERROR in Finding Student Data")
 									}else{
 										var chk = result[0]["state"];
 										var sum_arr=[];
@@ -613,7 +602,6 @@ app.post("/home",function(req,res){
 										var toatt_arr=[];
 										if(chk===false){ //NECESSARY ELSE /HOME WOULD NOT LOAD IF CHECKBOX==FALSE
 											//TIMETABLE
-											console.log("TIMETABLE 1")
 											time_tbl_data.find({},function(err,result){
 												if(err){
 													console.log(err);
@@ -624,7 +612,6 @@ app.post("/home",function(req,res){
 												day_tbl_data.find({},function(err,result){
 												if(err){
 													console.log(err);
-													console.log("ERROR in Finding Data")
 												}else{
 													day_table=result[0]["daytable"];
 													//=========================================
@@ -653,13 +640,11 @@ app.post("/home",function(req,res){
 														sum_arr.push(count_331);
 														sum_arr.push(count_333);
 														sum_arr.push(count_341);
-														// console.log(sum_arr);
 														//DBWORK
 														var abs_db;
 														abs_datas.find({uid:uid},function(err,result){
 															if(err){
 																console.log(err);
-																console.log("ERROR in Finding Student Data")
 															}else{
 																var data4=result.toString()
 																var a_count_301=(data4.match(/CS301/g) || []).length;
@@ -680,14 +665,12 @@ app.post("/home",function(req,res){
 																abs_arr.push(a_count_331);
 																abs_arr.push(a_count_333);
 																abs_arr.push(a_count_341);
-																// console.log(abs_arr);
 																for(var i=0;i<9;i++){
 																	var temp_val = sum_arr[i]-abs_arr[i];
 																	var temp_va= temp_val/sum_arr[i];
 																	var temp_v=temp_va*100;
 																	per_arr.push(temp_v.toFixed(2));
 																}
-																// console.log(per_arr);
 																for(var i=0;i<9;i++){
 																	var loop_temp_sum=sum_arr[i];
 																	var loop_temp_abs=abs_arr[i];
@@ -732,7 +715,7 @@ app.post("/home",function(req,res){
 																	var t5_data = new bunkboxdata({uid:uid,abs_arr:abs_arr,sum_arr:sum_arr,per_arr:per_arr,bun_arr:bun_arr,toatt_arr:toatt_arr});
 																	t5_data.save(function(err){
 																	if(err){
-																		console.log("ERROR")
+																		console.log(err);
 																	}else{
 																		res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:" ",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 																	}
@@ -752,7 +735,6 @@ app.post("/home",function(req,res){
 										});
 									}else{ //Else condition is necessary, otherwise on entering home route from login, the toggle button will be always turned OFF (tried it)
 										//TIMETABLE
-										console.log("TIMETABLE 2")
 										time_tbl_data.find({},function(err,result){
 											if(err){
 												console.log(err);
@@ -762,14 +744,12 @@ app.post("/home",function(req,res){
 														day_tbl_data.find({},function(err,result){
 														if(err){
 															console.log(err);
-															console.log("ERROR in Finding Data")
 														}else{
 															day_table=result[0]["daytable"];
 															//SUMMARY
 															sumdata.find({},function(err,result){
 															if(err){
 																console.log(err);
-																console.log("ERROR in loading Summary")
 															}else{
 																data3=result[0]["sumVal"].toString();
 																var count_301=(data3.match(/CS301/g) || []).length;
@@ -794,7 +774,6 @@ app.post("/home",function(req,res){
 																abs_datas.find({uid:uid},function(err,result){
 																	if(err){
 																		console.log(err);
-																		console.log("ERROR in Finding Student Data")
 																	}else{
 																		var data4=result.toString()
 																		var a_count_301=(data4.match(/CS301/g) || []).length;
@@ -815,14 +794,12 @@ app.post("/home",function(req,res){
 																		abs_arr.push(a_count_331);
 																		abs_arr.push(a_count_333);
 																		abs_arr.push(a_count_341);
-																		// console.log(abs_arr);
 																		for(var i=0;i<9;i++){
 																			var temp_val = sum_arr[i]-abs_arr[i];
 																			var temp_va= temp_val/sum_arr[i];
 																			var temp_v=temp_va*100;
 																			per_arr.push(temp_v.toFixed(2));
 																		}
-																		// console.log(per_arr);
 																		for(var i=0;i<9;i++){
 																			var loop_temp_sum=sum_arr[i];
 																			var loop_temp_abs=abs_arr[i];
@@ -864,7 +841,7 @@ app.post("/home",function(req,res){
 																			var t5_data = new bunkboxdata({uid:uid,abs_arr:abs_arr,sum_arr:sum_arr,per_arr:per_arr,bun_arr:bun_arr,toatt_arr:toatt_arr});
 																			t5_data.save(function(err){
 																			if(err){
-																				console.log("ERROR")
+																				console.log(err);
 																			}else{
 																				res.render('profile.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,data:current_date,date:current_date,day:day,check_ed:"checked",arr:day_table,table_arr:timetable_read,hidstr:intent_empty_string,response:thk_res,hidyesorno:alter_table,absent_arr:abs_arr,summary_arr:sum_arr,percent_arr:per_arr,bunk_arr:bun_arr,attend_arr:toatt_arr});
 																			}
@@ -909,7 +886,6 @@ app.post("/home",function(req,res){
 			stud_var.find({au_uid:req.session.user},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					stud_db=result[0];
 					if(!req.session.user){
@@ -919,14 +895,12 @@ app.post("/home",function(req,res){
 						day_tbl_data.find({},function(err,result){
 						if(err){
 							console.log(err);
-							console.log("ERROR in Finding Data")
 						}else{
 							daily_timetable=result[0]["daytable"];
 						//CHECKBOX
 						check_data.find({},function(err,result){
 							if(err){
 								console.log(err);
-								console.log("ERROR in Finding Student Data")
 							}else{
 								var chk = result[0]["state"];
 								if(chk===false){
@@ -940,7 +914,6 @@ app.post("/home",function(req,res){
 											bunkboxdata.find({uid:req.session.user},function(err,result){
 											if(err){
 												console.log(err);
-												console.log("ERROR in Finding Student Data")
 											}else{
 												var abs_arr=result[0].abs_arr;
 												var sum_arr=result[0].sum_arr;
@@ -963,7 +936,6 @@ app.post("/home",function(req,res){
 									bunkboxdata.find({uid:req.session.user},function(err,result){
 									if(err){
 										console.log(err);
-										console.log("ERROR in Finding Student Data")
 									}else{
 										abs_arr=result[0].abs_arr;
 										sum_arr=result[0].sum_arr;
@@ -991,7 +963,6 @@ app.post("/home",function(req,res){
 			stud_var.find({au_uid:req.session.user},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					stud_db=result[0];
 					if(!req.session.user){
@@ -1012,7 +983,6 @@ app.post("/home",function(req,res){
 			stud_var.find({au_uid:req.session.user},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					stud_db=result[0];
 					if(!req.session.user){
@@ -1025,13 +995,7 @@ app.post("/home",function(req,res){
 		});
 
 
-		// absent.forEach(function(arrayItem) {
-		// 		var s_data = new abs_datas(arrayItem);
-		// 		s_data.save(function(err){
-		// 			if(err){
-		// 				console.log("ERROR")
-		// 			}
-		// 		});
+
 
 
 		//ROUTE ASSOCIATED WITH CHECKBOX
@@ -1042,9 +1006,7 @@ app.post("/home",function(req,res){
 					if(err){
 						console.log(err);
 					}else{
-						console.log("stage 1")
 						var val=new check_data({state:false});
-						console.log("stage 2")
 						val.save(function(err){
 							if(err){
 								console.log(err);
@@ -1060,9 +1022,7 @@ app.post("/home",function(req,res){
 					if(err){
 						console.log(err);
 					}else{
-						console.log("stage 1")
 						var val=new check_data({state:true});
-						console.log("stage 2")
 						val.save(function(err){
 							if(err){
 								console.log(err);
@@ -1075,13 +1035,11 @@ app.post("/home",function(req,res){
 				});
 
 			}
-			console.log("redirect")
 			res.redirect('/home');
 		});
 
 
 		app.post("/ttable_alter",function(req,res){
-			console.log(req.body);
 			if(req.body.yesno==='No'){
 				alter_table="";
 				thk_res="";
@@ -1115,7 +1073,7 @@ app.post("/home",function(req,res){
 				var t_data = new chg_tbl_data(req.body);
 				t_data.save(function(err){
 				if(err){
-					console.log("ERROR")
+					console.log(err);
 				}
 				});
 			}
@@ -1132,12 +1090,9 @@ app.post("/home",function(req,res){
 						console.log(err);
 					}else{
 						var table_data = new time_tbl_data(req.body);
-						console.log(req.body);
-						console.log("________");
-						console.log(table_data);
 						table_data.save(function(err){
 						if(err){
-							console.log("ERROR")
+							console.log(err);
 						}else{
 							res.redirect('timetable');
 						}
@@ -1151,7 +1106,6 @@ app.post("/home",function(req,res){
 			stud_var.find({au_uid:req.session.user},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					stud_db=result[0];
 					if(!req.session.user){
@@ -1161,7 +1115,6 @@ app.post("/home",function(req,res){
 						sumdata.find({},function(err,result){
 						if(err){
 							console.log(err);
-							console.log("ERROR in loading Summary")
 						}else{
 							var summary=result[0]["sumVal"];
 						res.render('summary.ejs',{stud_name:stud_db.name , class_name:stud_db.au_class,sumarr:summary});
@@ -1177,7 +1130,6 @@ app.post("/home",function(req,res){
 			stud_var.find({au_uid:req.session.user},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					stud_db=result[0];
 					if(!req.session.user){
@@ -1211,14 +1163,12 @@ app.post("/home",function(req,res){
 			check_data.find({},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					var chk = result[0]["state"];
 					//SUMMARY
 					sumdata.find({},function(err,result){
 					if(err){
 						console.log(err);
-						console.log("ERROR in loading Summary")
 					}else{
 						var sum=result[0]["sumVal"];
 						if(chk===true){
@@ -1250,14 +1200,12 @@ app.post("/home",function(req,res){
 													summary["p5"]=ftt["1_5"];
 													summary["p6"]=ftt["1_6"];
 													summary["p7"]=ftt["1_7"];
-													console.log(summary);
 													sum.unshift(summary);
 													summary={};
 													summaryUpdate(sum);
 												}
 												setTimeout(madedelay,5000);
 											}else if(d.getDay()==2){
-												console.log("INSIDE Second Loop)");
 												empty.push(current_date);
 												empty.push("Tuesday");
 												for(i=1;i<=7;i++){
@@ -1273,7 +1221,6 @@ app.post("/home",function(req,res){
 												}
 												});
 												function madedelay(){
-													console.log("Inside Made Delay");
 													summary={};
 													summary["Date"]=empty[0];
 													summary["Day"]=empty[1];
@@ -1389,12 +1336,8 @@ app.post("/home",function(req,res){
 								chg_tbl_data.find({},function(err,result){
 								if(err){
 									console.log(err);
-									console.log("ERROR in Finding Student Data")
 								}else{
 									ftt = result[0];
-									console.log("CHANGED")
-									console.log(result);
-									console.log(ftt);
 										console.log("Read data from changed table");
 									}
 									});
@@ -1411,7 +1354,6 @@ app.post("/home",function(req,res){
 										summary["p5"]=ftt["a_5"];
 										summary["p6"]=ftt["a_6"];
 										summary["p7"]=ftt["a_7"];
-										console.log(summary);
 										sum.unshift(summary);
 										summary={};
 										summaryUpdate(sum);
@@ -1436,13 +1378,12 @@ app.post("/home",function(req,res){
 			counter=0;
 			pingval=0;
 			dateupdate();
-  		console.log('Date Update at 12:15 AM');
+  		console.log('Date Update at 12:05 AM');
 			console.log(current_date);
 			//LOGDATA
 			logdata.find({},function(err,result){
 			if(err){
 				console.log(err);
-				console.log("ERROR in Finding Student Data")
 			}else{
 				var log_temp=result[0];
 				var log_user=log_temp["log_user"];
@@ -1457,7 +1398,7 @@ app.post("/home",function(req,res){
 						var tl_data = new logdata({log_user:log_user,log_time:log_time});
 						tl_data.save(function(err){
 						if(err){
-							console.log("ERROR")
+							console.log(err);
 						}
 						});
 					}
@@ -1481,7 +1422,6 @@ app.post("/home",function(req,res){
 			check_data.find({},function(err,result){
 				if(err){
 					console.log(err);
-					console.log("ERROR in Finding Student Data")
 				}else{
 					var chk = result[0]["state"];
 					if(chk===true){
