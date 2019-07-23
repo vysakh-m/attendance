@@ -32,14 +32,18 @@ var t_arr=[];
 var change_date="";
 var absent_t={};
 const fs=require('fs');
+var pingval=0;
 
 
 setInterval(function() {
+		if(pingval%6==0){
+			console.log("Ping at "+time);
+		}
 		var today = new Date();
 		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 		http.get("http://attdemo.herokuapp.com/");
-    console.log("Ping at "+time);
-}, 1500000);
+		pingval++;
+}, 300000);
 
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{dbName:'rsms_attendance',useNewUrlParser:true});
@@ -297,9 +301,19 @@ app.get("/",function(req,res){
 app.get("/login",function(req,res){
   res.render('login.ejs',{in_cred:"none",in_pass:"none"});
 });
+
+app.get("/admin",function(req,res){
+	if(!req.asession.user){
+		res.redirect("/admin/login");
+	}else{
+		res.redirect("/admin/home");
+	}
+});
+
 app.get("/admin/login",function(req,res){
   res.render('adminlogin.ejs',{in_cred:"none"});
 });
+
 app.get("/admin/logout",function(req,res){
 	if(!req.asession.user){
 		res.redirect('login');
@@ -312,17 +326,22 @@ app.get("/admin/logout",function(req,res){
 	}
 });
 app.get("/admin/summary",function(req,res){
-	//SUMMARY
-	sumdata.find({},function(err,result){
-	if(err){
-		console.log(err);
-		console.log("ERROR in loading Summary")
+	if(!req.asession.user){
+		res.redirect('login');
 	}else{
-		var summary=result[0]["sumVal"];
-  	res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
+		//SUMMARY
+		sumdata.find({},function(err,result){
+		if(err){
+			console.log(err);
+			console.log("ERROR in loading Summary")
+		}else{
+			var summary=result[0]["sumVal"];
+	  	res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
+		}
+	});
 }
 });
-});
+
 app.post("/admin/changetable",function(req,res){
 	//SUMMARY
 	sumdata.find({},function(err,result){
@@ -352,6 +371,7 @@ app.post("/admin/changetable",function(req,res){
 	}
 	});
 });
+
 app.post("/admin/savechanges",function(req,res){
 	//SUMMARY
 	sumdata.find({},function(err,result){
@@ -378,11 +398,11 @@ app.post("/admin/savechanges",function(req,res){
 			// res.render('adminsummary.ejs',{sumarr:summary,c_arr:t_arr,d_change:"none"});
   			res.redirect("/admin/summary");
 		}, 2000);
-
-
 }
 });
 });
+
+
 app.get("/admin/home",function(req,res){
 	if(!req.asession.user){
 		res.redirect('login');
@@ -444,8 +464,7 @@ app.get("/admin/home",function(req,res){
 			}
 		});
 		}
-			});
-
+		});
 	}
 
 });
@@ -1410,66 +1429,12 @@ app.post("/home",function(req,res){
 	});
 }
 
-//COMMENT THIS OUT LATER BEFORE DEPLOYMENT
-// function dailytablecheck(){ //FUNCTION USED to be called by cron job daily once
-// 	var currentD = new Date();
-// 	var startHappyHourD = new Date();
-// 	startHappyHourD.setHours(12,00,0); // 6.30 pm
-// 	var endHappyHourD = new Date();
-// 	endHappyHourD.setHours(23,55,0); // 11.55 pm
-// 	if(currentD >= startHappyHourD && currentD < endHappyHourD ){
-// 			intent_empty_string="";
-// 	}else{
-// 			intent_empty_string="none";
-// 	}
-// }
-
-
-		// var c_date = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-		// var daily_c_value = new Date();
-		// daily_c_value.setHours(11,22,0);
-		// console.log(daily_c_value);
-
-
-		// //Testing
-		// cron.schedule('00 28 21 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
-		// 	counter=0;
-		// 	dateupdate();
-  	// 	console.log('Date Update at 12:15 AM');
-		// 	console.log(current_date);
-		// },{
-		// 	timeZone:'Asia/Kolkata'
-		// });
-		// cron.schedule('00 27 21 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
-		// 	counter=0;
-		// 	dateupdate();
-  	// 	console.log('Date Update at 12:15 AM');
-		// 	console.log(current_date);
-		// },{
-		// 	timeZone:'Asia/Kolkata'
-		// });
-		// cron.schedule('00 26 21 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
-		// 	counter=0;
-		// 	dateupdate();
-  	// 	console.log('Date Update at 12:15 AM');
-		// 	console.log(current_date);
-		// },{
-		// 	timeZone:'Asia/Kolkata'
-		// });
-		// cron.schedule('00 25 21 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
-		// 	counter=0;
-		// 	dateupdate();
-  	// 	console.log('Date Update at 12:15 AM');
-		// 	console.log(current_date);
-		// },{
-		// 	timeZone:'Asia/Kolkata'
-		// });
 
 
 
-
-		cron.schedule('30 21 15 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:15
+		cron.schedule('00 05 00 * * 0-6', () => { //CRON JOB FOR DAILY DATE UPDATE 00:05
 			counter=0;
+			pingval=0;
 			dateupdate();
   		console.log('Date Update at 12:15 AM');
 			console.log(current_date);
@@ -1499,20 +1464,19 @@ app.post("/home",function(req,res){
 					});
 				}
 			});
-
-
-
-
-
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 25 00 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
+
+
+		cron.schedule('00 00 23 * * 0-6', () => { //CRON JOB FOR ADDING DAILY SCHEDULE TO SUMMARY 23:00
 			loop();
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 13 03 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
+
+
+		cron.schedule('00 30 16 * * 0-6', () => { //CRON JOB TO SHOW OPTIONS TO CHANGE DAY'S TABLE 16:30
 			// dailytablecheck();
 			check_data.find({},function(err,result){
 				if(err){
@@ -1529,7 +1493,7 @@ app.post("/home",function(req,res){
 		},{
 			timeZone:'Asia/Kolkata'
 		});
-		cron.schedule('00 50 04 * * 0-6', () => { //CRON JOB FOR DISABLE OPTIONS TO CHANGE DAY'S TIMETABLE 22:30
+		cron.schedule('00 30 22 * * 0-6', () => { //CRON JOB FOR DISABLE OPTIONS TO CHANGE DAY'S TIMETABLE 22:30
 			// dailytablecheck();
 			intent_empty_string="none";
 			thk_res=""
