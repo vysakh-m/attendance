@@ -1,16 +1,17 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+var express 		= 	require('express'),
+ 		bodyParser 	= 	require('body-parser'),
+ 		alert 			= 	require('alert-node'),
+ 		JSAlert 		= 	require("js-alert"),
+ 		schedule 		= 	require('node-schedule'),
+ 		prependFile = 	require('prepend-file'),
+ 		cron 				= 	require('node-cron'),
+ 		session 		= 	require('client-sessions'),
+ 		mongoose 		= 	require('mongoose'),
+ 		http 				= 	require("http");
+
 const puppeteer = require('puppeteer');
-var alert = require('alert-node');
-var JSAlert = require("js-alert");
-var schedule = require('node-schedule');
-var prependFile = require('prepend-file');
-var cron = require('node-cron');
-var session = require('client-sessions');
-var mongoose = require('mongoose');
-var http = require("http");
-app.use(bodyParser.urlencoded({ extended: true }));
+var app 				= express();
+
 var uid;
 var absent=[];
 var new_absent={};
@@ -34,7 +35,7 @@ var absent_t={};
 const fs=require('fs');
 var pingval=0;
 
-
+//================PING=========================
 setInterval(function() {
 		if(pingval%6==0){
 			var today = new Date();
@@ -44,97 +45,27 @@ setInterval(function() {
 		http.get("http://attdemo.herokuapp.com/");
 		pingval++;
 }, 300000);
-
+//============MONGO CONNECT====================
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{dbName:'rsms_attendance',useNewUrlParser:true});
-var studSchema=new mongoose.Schema({
-	name:String,
-	au_uid:String,
-	au_pass:String,
-	au_class:String
-});
-var absentSchema=new mongoose.Schema({
-	uid:String,
-	date:String,
-	value:[String]
-});
-var checkSchema=new mongoose.Schema({
-	state:Boolean
-});
-var changedTableSchema=new mongoose.Schema({
-	a_1:String,
-	a_2:String,
-	a_3:String,
-	a_4:String,
-	a_5:String,
-	a_6:String,
-	a_7:String,
-	changedval:String
-});
-var dayTableSchema=new mongoose.Schema({
-	daytable:[String]
-})
-var timeTableSchema=new mongoose.Schema({
-	"1_1":String,"1_2":String,"1_3":String,"1_4":String,"1_5":String,"1_6":String,"1_7":String,
-	"2_1":String,"2_2":String,"2_3":String,"2_4":String,"2_5":String,"2_6":String,"2_7":String,
-	"3_1":String,"3_2":String,"3_3":String,"3_4":String,"3_5":String,"3_6":String,"3_7":String,
-	"4_1":String,"4_2":String,"4_3":String,"4_4":String,"4_5":String,"4_6":String,"4_7":String,
-	"5_1":String,"5_2":String,"5_3":String,"5_4":String,"5_5":String,"5_6":String,"5_7":String
-});
-var sumSchema=new mongoose.Schema({
-	sumVal:[{
-		Date:String,
-		Day:String,
-		p1:String,
-		p2:String,
-		p3:String,
-		p4:String,
-		p5:String,
-		p6:String,
-		p7:String
-	}]
-});
-var logSchema=new mongoose.Schema({
-	log_user:[String],
-	log_time:[String]
-})
-var countSchema=new mongoose.Schema({
-	details:[{
-		uid:String,
-		name:String,
-		count:String
-	}]
-});
-var bunkboxSchema=new mongoose.Schema({
-	uid:String,
-	abs_arr:[String],
-	sum_arr:[String],
-	per_arr:[String],
-	bun_arr:[String],
-	toatt_arr:[String]
-})
+//=============MODELS==========================
+var stud_var			=		require('./models/Student.js'),
+ 		abs_datas			=		require('./models/Absent.js'),
+ 		check_data		=		require('./models/Check.js'),
+ 		chg_tbl_data	=		require('./models/ChangedTable.js'),
+ 		day_tbl_data	=		require('./models/DayTable.js'),
+ 		time_tbl_data =		require('./models/TimeTable.js'),
+ 		sumdata       =		require('./models/Summary.js'),
+ 		logdata				=		require('./models/Log.js'),
+ 		countdata			=		require('./models/Count.js'),
+ 		bunkboxdata		=		require('./models/BunkBox.js');
+//==============================================
 
-var stud_var=mongoose.model("stud_datas",studSchema);
-var abs_datas=mongoose.model("abs_datas",absentSchema);
-var check_data=mongoose.model("check_datas",checkSchema);
-var chg_tbl_data=mongoose.model("change_table_datas",changedTableSchema);
-var day_tbl_data=mongoose.model("day_table_datas",dayTableSchema);
-var time_tbl_data=mongoose.model("time_table_datas",timeTableSchema);
-var sumdata=mongoose.model("sum_datas",sumSchema);
-var logdata=mongoose.model("log_datas",logSchema);
-var countdata=mongoose.model("count_datas",countSchema);
-var bunkboxdata=mongoose.model("bunk_box_datas",bunkboxSchema);
-
-
-
-
-
-
-var uid_list=["U1703137","U1703138","U1703139","U1703140","U1703141","U1703142","U1703143","U1703144","U1703145","U1703146","U1703147","U1703148","U1703149","U1703150","U1703151","U1703152","U1703153","U1703154","U1703155","U1703156","U1703157","U1703158","U1703159","U1703160","U1703161","U1703162","U1703163","U1703164","U1703165","U1703166","U1703167","U1703168","U1703169","U1703170","U1703171","U1703172","U1703173","U1703174","U1703175","U1703176","U1703177","U1703178","U1703179","U1703180","U1703181","U1703182","U1703183","U1703184","U1703185","U1703186","U1703187","U1703188","U1703189","U1703190","U1703191","U1703192","U1703193","U1703194","U1703195","U1703196","U1703197","U1703198","U1703199","U1703200","U1703201","U1703202","U1703203","U1703204"]
-
+//=================DATA=========================
+var uid_list=["U1703137","U1703138","U1703139","U1703140","U1703141","U1703142","U1703143","U1703144","U1703145","U1703146","U1703147","U1703148","U1703149","U1703150","U1703151","U1703152","U1703153","U1703154","U1703155","U1703156","U1703157","U1703158","U1703159","U1703160","U1703161","U1703162","U1703163","U1703164","U1703165","U1703166","U1703167","U1703168","U1703169","U1703170","U1703171","U1703172","U1703173","U1703174","U1703175","U1703176","U1703177","U1703178","U1703179","U1703180","U1703181","U1703182","U1703183","U1703184","U1703185","U1703186","U1703187","U1703188","U1703189","U1703190","U1703191","U1703192","U1703193","U1703194","U1703195","U1703196","U1703197","U1703198","U1703199","U1703200","U1703201","U1703202","U1703203","U1703204"];
 var month=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 var week=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
+// =============================================
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("styles"));
 
@@ -216,8 +147,7 @@ function dateupdate(){
 					});
 				}
 				});
-	}
-
+	};
 
 	d=new Date();
 	day=week[d.getDay()];
@@ -652,7 +582,13 @@ app.post("/home",function(req,res){
 																var a_count_305=(data4.match(/CS305/g) || []).length;
 																var a_count_307=(data4.match(/CS307/g) || []).length;
 																var a_count_309=(data4.match(/CS309/g) || []).length;
-																var a_elective=(data4.match(/Elective/g) || []).length;
+																//Elective
+																var a = (data4.match(/CS361/g) || []).length;
+																var b = (data4.match(/CS365/g) || []).length;
+																var c = (data4.match(/CS367/g) || []).length;
+																var d = (data4.match(/CS369/g) || []).length;
+																var a_elective=a+b+c+d;
+																//=======
 																var a_count_331=(data4.match(/CS331/g) || []).length;
 																var a_count_333=(data4.match(/CS333/g) || []).length;
 																var a_count_341=(data4.match(/CS341/g) || []).length;
@@ -781,7 +717,13 @@ app.post("/home",function(req,res){
 																		var a_count_305=(data4.match(/CS305/g) || []).length;
 																		var a_count_307=(data4.match(/CS307/g) || []).length;
 																		var a_count_309=(data4.match(/CS309/g) || []).length;
-																		var a_elective=(data4.match(/Elective/g) || []).length;
+																		//Elective
+																		var a = (data4.match(/CS361/g) || []).length;
+																		var b = (data4.match(/CS365/g) || []).length;
+																		var c = (data4.match(/CS367/g) || []).length;
+																		var d = (data4.match(/CS369/g) || []).length;
+																		var a_elective=a+b+c+d;
+																		//=======
 																		var a_count_331=(data4.match(/CS331/g) || []).length;
 																		var a_count_333=(data4.match(/CS333/g) || []).length;
 																		var a_count_341=(data4.match(/CS341/g) || []).length;
