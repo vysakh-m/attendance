@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/bootstrap.css">
-    <link rel="stylesheet" href="/admin_home.css">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><strong>RSMS</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown" >
-        <ul class="navbar-nav navbar-right">
-          <li class="nav-item ">
-            <a class="nav-link active" href="/admin/home">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/admin/summary">Summary</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/admin/logout">Logout</a>
-          </li>
 
-        </ul>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="home_half">
-        <h4>Last Active</h4>
-        <hr style="height:1px;border:none;color:#333;background-color:#333;">
-        <%  for(var i=0;i<=log_user.length-1;i++){ %>
-          <h5> <%= log_user[i] %> (<%= log_time[i] %>) </h5>
-        <%  } %>
-      </div>
-      <div class="home_half">
-        <h4>Login Count</h4>
-        <hr style="height:1px;border:none;color:#333;background-color:#333;">
-        <% log_count.forEach(function(key) { %>
-          <h5> <%= key["name"] %> : <%= key["count"] %> </h5>
-        <% }); %>
-      </div>
+<head>
+  <meta charset="utf-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/bootstrap.css">
+  <link rel="stylesheet" href="/admin_home.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><strong>RSMS</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item ">
+          <a class="nav-link active" href="/admin/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin/summary">Summary</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/admin/logout">Logout</a>
+        </li>
+
+      </ul>
     </div>
-  </body>
+  </nav>
+  <div class="container">
+    <div class="home_half">
+      <h4>Last Active</h4>
+      <hr style="height:1px;border:none;color:#333;background-color:#333;">
+      <%  for(var i=0;i<=log_user.length-1;i++){ %>
+      <h5> <%= log_user[i] %> (<%= log_time[i] %>) </h5>
+      <%  } %>
+    </div>
+    <div class="home_half">
+      <h4>Login Count</h4>
+      <hr style="height:1px;border:none;color:#333;background-color:#333;">
+      <% log_count.forEach(function(key) { %>
+      <h5> <%= key["name"] %> : <%= key["count"] %> </h5>
+      <% }); %>
+    </div>
+  </div>
+</body>
+
 </html>

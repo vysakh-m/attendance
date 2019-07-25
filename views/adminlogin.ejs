@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Page</title>
-    <script type="text/javascript">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login Page</title>
+  <script type="text/javascript">
     function show_pass() {
-        var x = document.getElementById("pass");
-        if (x.type === "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
-    }
-    function phs(){
-      var y = document.getElementsByTagName("p");
-      if(y.style.visibility==='hidden'){
-        y.style.visibility='visible';
-      }else{
-        y.style.visibility='hidden';
+      var x = document.getElementById("pass");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
       }
     }
-    </script>
-  </head>
-  <body>
-    <main>
-      <div class="login">
-        <h1>ADMIN LOGIN</h1>
-        <form  method="post" action="/admin/home">
-          <input class="input_form" type="text" name="user" placeholder="UID" required>
-          <input class="input_form" type="password" name="pass" placeholder="Password" id="pass" required>
-          <div class="check_box">
-            <input id="chk_bxk" onclick="show_pass()" type="checkbox" name="check" >
-            <label for="chk_bxk">Show Password</label>
-          </div>
-          <p id="demo-password" style="display:<%=in_cred%>">Invalid Credentials..!!</p>
-          <input class="input_button ripple" onclick="phs()" type="submit" value="LOGIN">
-        </form>
 
-      </div>
-    </main>
-  </body>
+    function phs() {
+      var y = document.getElementsByTagName("p");
+      if (y.style.visibility === 'hidden') {
+        y.style.visibility = 'visible';
+      } else {
+        y.style.visibility = 'hidden';
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <main>
+    <div class="login">
+      <h1>ADMIN LOGIN</h1>
+      <form method="post" action="/admin/home">
+        <input class="input_form" type="text" name="user" placeholder="UID" required>
+        <input class="input_form" type="password" name="pass" placeholder="Password" id="pass" required>
+        <div class="check_box">
+          <input id="chk_bxk" onclick="show_pass()" type="checkbox" name="check">
+          <label for="chk_bxk">Show Password</label>
+        </div>
+        <p id="demo-password" style="display:<%=in_cred%>">Invalid Credentials..!!</p>
+        <input class="input_button ripple" onclick="phs()" type="submit" value="LOGIN">
+      </form>
+
+    </div>
+  </main>
+</body>

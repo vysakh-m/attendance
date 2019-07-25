@@ -1,75 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>DASHBOARD</title>
-    <script type="text/javascript" src=".jquery-3.4.1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/bootstrap.css">
-    <link rel="stylesheet" href="/summary.css">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand" href="#"><strong>RSMS</strong></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown" >
-        <ul class="navbar-nav navbar-right">
-          <li class="nav-item">
-            <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/timetable">Time Table</a>
-          </li>
-          <li class="nav-item active" >
-            <a class="nav-link" href="/summary">Class Summary</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/instructions">Instructions</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
 
-        </ul>
-      </div>
-    </nav>
-    <div class="user_details">
-        <h5 class="user_text"> Name : <%= stud_name %></h5>
-        <div class="class_r">
-          <h5 class="user_text">Class : <%= class_name %></h5>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <title>DASHBOARD</title>
+  <script type="text/javascript" src=".jquery-3.4.1.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/bootstrap.css">
+  <link rel="stylesheet" href="/summary.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><strong>RSMS</strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/timetable">Time Table</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/summary">Class Summary</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/instructions">Instructions</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+
+      </ul>
     </div>
-    <hr>
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Day</th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
-        <th>6</th>
-        <th>7</th>
-      </tr>
+  </nav>
+  <div class="user_details">
+    <h5 class="user_text"> Name : <%= stud_name %></h5>
+    <div class="class_r">
+      <h5 class="user_text">Class : <%= class_name %></h5>
+    </div>
+  </div>
+  <hr>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Day</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+    </tr>
     <%  for(var i=0;i<=sumarr.length-1;i++){ %>
-        <tr>
-          <td><%=sumarr[i]["Date"]%></td>
-          <td><%=sumarr[i]["Day"]%></td>
-          <td><%=sumarr[i]["p1"]%></td>
-          <td><%=sumarr[i]["p2"]%></td>
-          <td><%=sumarr[i]["p3"]%></td>
-          <td><%=sumarr[i]["p4"]%></td>
-          <td><%=sumarr[i]["p5"]%></td>
-          <td><%=sumarr[i]["p6"]%></td>
-          <td><%=sumarr[i]["p7"]%></td>
-        </tr>
+    <tr>
+      <td><%=sumarr[i]["Date"]%></td>
+      <td><%=sumarr[i]["Day"]%></td>
+      <td><%=sumarr[i]["p1"]%></td>
+      <td><%=sumarr[i]["p2"]%></td>
+      <td><%=sumarr[i]["p3"]%></td>
+      <td><%=sumarr[i]["p4"]%></td>
+      <td><%=sumarr[i]["p5"]%></td>
+      <td><%=sumarr[i]["p6"]%></td>
+      <td><%=sumarr[i]["p7"]%></td>
+    </tr>
     <%  } %>
+  </table>
+</body>
 
-
-
-    </table>
-  </body>
 </html>
