@@ -38,8 +38,8 @@
       <div class="home_half">
         <h4>Login Count</h4>
         <hr style="height:1px;border:none;color:#333;background-color:#333;">
-        <% Object.keys(log_count).forEach(function(key) { %>
-          <h5> <%= log_count[key]["name"] %> : <%= log_count[key]["count"] %> </h5>
+        <% log_count.forEach(function(key) { %>
+          <h5> <%= key["name"] %> : <%= key["count"] %> </h5>
         <% }); %>
       </div>
     </div>
