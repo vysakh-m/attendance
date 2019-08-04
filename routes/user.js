@@ -141,7 +141,7 @@ router.post("/home", function(req, res) {
             await page.click('input[type="submit"]');
             await page.goto('https://www.rajagiritech.ac.in/stud/ktu/Student/Leave.asp');
             await page.evaluate(() => {
-              document.querySelector('select[name="code"]').selectedIndex = 3;
+              document.querySelector('select[name="code"]').selectedIndex = 4;
             });
             await page.click('input[type="submit"]');
             //await page.screenshot({path: 'scrap_target.png'}); //Necessary to make the page load fully for screenshot, so scraping works perfectly
