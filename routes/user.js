@@ -12,6 +12,7 @@ router.use(bodyParser.urlencoded({
 var middleWare = require('../middleware/index.js');
 var uid;
 var pass;
+var roll;
 var timetable_read = {};
 var daily_timetable = middleWare.daily_timetable;
 var intent_empty_string = middleWare.intent_empty_string;
@@ -46,7 +47,7 @@ var stud_var = require('../models/Student.js'),
   countdata = require('../models/Count.js'),
   bunkboxdata = require('../models/BunkBox.js');
 //==============================================================================
-var uid_list = ["U1703137", "U1703138", "U1703139", "U1703140", "U1703141", "U1703142", "U1703143", "U1703144", "U1703145", "U1703146", "U1703147", "U1703148", "U1703149", "U1703150", "U1703151", "U1703152", "U1703153", "U1703154", "U1703155", "U1703156", "U1703157", "U1703158", "U1703159", "U1703160", "U1703161", "U1703162", "U1703163", "U1703164", "U1703165", "U1703166", "U1703167", "U1703168", "U1703169", "U1703170", "U1703171", "U1703172", "U1703173", "U1703174", "U1703175", "U1703176", "U1703177", "U1703178", "U1703179", "U1703180", "U1703181", "U1703182", "U1703183", "U1703184", "U1703185", "U1703186", "U1703187", "U1703188", "U1703189", "U1703190", "U1703191", "U1703192", "U1703193", "U1703194", "U1703195", "U1703196", "U1703197", "U1703198", "U1703199", "U1703200", "U1703201", "U1703202", "U1703203", "U1703204"];
+var uid_list = ["U1703137", "U1703138", "U1703139", "U1703140", "U1703141", "U1703142", "U1703143", "U1703144", "U1703145", "U1703146", "U1703147", "U1703148", "U1703149", "U1703150", "U1703151", "U1703152", "U1703153", "U1703154", "U1703155", "U1703156", "U1703157", "U1703158", "U1703159", "U1703160", "U1703161", "U1703162", "U1703163", "U1703165", "U1703167", "U1703168","U1703170", "U1703171", "U1703172", "U1703173", "U1703174", "U1703175", "U1703176", "U1703177", "U1703178", "U1703179", "U1703180", "U1703181", "U1703182", "U1703183", "U1703184", "U1703185", "U1703186", "U1703187", "U1703188", "U1703189", "U1703190", "U1703191", "U1703192", "U1703193", "U1703194", "U1703195", "U1703196", "U1703197", "U1703198", "U1703199", "U1703200", "U1703201", "U1703202", "U1703203", "U1703204"];
 //===============================SESSION========================================
 router.use(session({
   cookieName: 'session',
@@ -164,9 +165,12 @@ router.post("/home", function(req, res) {
               absent_t = {};
               i++
             }
+            roll=uid_list.indexOf(uid);
+
 
 
             function explode() {
+
               //DELETE ALL ABSENT ENTRIES OF USER
               abs_datas.find({
                 uid: uid
@@ -212,31 +216,7 @@ router.post("/home", function(req, res) {
                           } else {
                             day_table = result[0]["daytable"];
                             //=========================================
-                            //SUMMARY
-                            sumdata.find({}, function(err, result) {
-                              if (err) {
-                                console.log(err);
-                                console.log("ERROR in loading Summary")
-                              } else {
-                                data3 = result[0]["sumVal"].toString();
-                                var count_301 = (data3.match(/CS301/g) || []).length;
-                                var count_303 = (data3.match(/CS303/g) || []).length;
-                                var count_305 = (data3.match(/CS305/g) || []).length;
-                                var count_307 = (data3.match(/CS307/g) || []).length;
-                                var count_309 = (data3.match(/CS309/g) || []).length;
-                                var elective = (data3.match(/Elective/g) || []).length;
-                                var count_331 = (data3.match(/CS331/g) || []).length;
-                                var count_333 = (data3.match(/CS333/g) || []).length;
-                                var count_341 = (data3.match(/CS341/g) || []).length;
-                                sum_arr.push(count_301);
-                                sum_arr.push(count_303);
-                                sum_arr.push(count_305);
-                                sum_arr.push(count_307);
-                                sum_arr.push(count_309);
-                                sum_arr.push(elective);
-                                sum_arr.push(count_331);
-                                sum_arr.push(count_333);
-                                sum_arr.push(count_341);
+
                                 //DBWORK
                                 var abs_db;
                                 abs_datas.find({
@@ -245,120 +225,300 @@ router.post("/home", function(req, res) {
                                   if (err) {
                                     console.log(err);
                                   } else {
-                                    var data4 = result.toString()
-                                    var a_count_301 = (data4.match(/CS301/g) || []).length;
-                                    var a_count_303 = (data4.match(/CS303/g) || []).length;
-                                    var a_count_305 = (data4.match(/CS305/g) || []).length;
-                                    var a_count_307 = (data4.match(/CS307/g) || []).length;
-                                    var a_count_309 = (data4.match(/CS309/g) || []).length;
-                                    //Elective
-                                    var a = (data4.match(/CS361/g) || []).length;
-                                    var b = (data4.match(/CS365/g) || []).length;
-                                    var c = (data4.match(/CS367/g) || []).length;
-                                    var d = (data4.match(/CS369/g) || []).length;
-                                    var a_elective = a + b + c + d;
-                                    //=======
-                                    var a_count_331 = (data4.match(/CS331/g) || []).length;
-                                    var a_count_333 = (data4.match(/CS333/g) || []).length;
-                                    var a_count_341 = (data4.match(/CS341/g) || []).length;
-                                    abs_arr.push(a_count_301);
-                                    abs_arr.push(a_count_303);
-                                    abs_arr.push(a_count_305);
-                                    abs_arr.push(a_count_307);
-                                    abs_arr.push(a_count_309);
-                                    abs_arr.push(a_elective);
-                                    abs_arr.push(a_count_331);
-                                    abs_arr.push(a_count_333);
-                                    abs_arr.push(a_count_341);
-                                    for (var i = 0; i < 9; i++) {
-                                      var temp_val = sum_arr[i] - abs_arr[i];
-                                      var temp_va = temp_val / sum_arr[i];
-                                      var temp_v = temp_va * 100;
-                                      per_arr.push(temp_v.toFixed(2));
-                                    }
-                                    for (var i = 0; i < 9; i++) {
-                                      var loop_temp_sum = sum_arr[i];
-                                      var loop_temp_abs = abs_arr[i];
-                                      var j = 1;
-                                      var k = 1;
-                                      var bunk_count = 0;
-                                      var att_count = 0;
-                                      while (j != 0) {
-                                        if (loop_temp_abs * 4 < loop_temp_sum) {
-                                          bunk_count++;
-                                          loop_temp_abs++;
-                                          loop_temp_sum++;
+
+                                    if(roll>=32){ //B2
+                                      var data4 = result.toString()
+                                      var a_count_301 = (data4.match(/CS301/g) || []).length;
+                                      var a_count_303 = (data4.match(/CS303/g) || []).length;
+                                      var a_count_305 = (data4.match(/CS305/g) || []).length;
+                                      var a_count_307 = (data4.match(/CS307/g) || []).length;
+                                      var a_count_309 = (data4.match(/CS309/g) || []).length;
+                                      //Elective
+                                      var a = (data4.match(/CS361/g) || []).length;
+                                      var b = (data4.match(/CS365/g) || []).length;
+                                      var c = (data4.match(/CS367/g) || []).length;
+                                      var d = (data4.match(/CS369/g) || []).length;
+                                      var a_elective = a + b + c + d;
+                                      //=======
+                                      var b2_331 = (data4.match(/CS331/g) || []).length;
+                                      var b2_333 = (data4.match(/CS333/g) || []).length;
+                                      var a_count_341 = (data4.match(/CS341/g) || []).length;
+                                      abs_arr.push(a_count_301);
+                                      abs_arr.push(a_count_303);
+                                      abs_arr.push(a_count_305);
+                                      abs_arr.push(a_count_307);
+                                      abs_arr.push(a_count_309);
+                                      abs_arr.push(a_elective);
+                                      abs_arr.push(0);
+                                      abs_arr.push(0);
+                                      abs_arr.push(a_count_341);
+                                      abs_arr.push(b2_331);
+                                      abs_arr.push(b2_333);
+                                      //SUMMARY
+                                      sumdata.find({}, function(err, result) {
+                                        if (err) {
+                                          console.log(err);
+                                          console.log("ERROR in loading Summary")
                                         } else {
-                                          j = 0;
-                                        }
+                                          data3 = result[0]["sumVal"].toString();
+                                          var count_301 = (data3.match(/CS301/g) || []).length;
+                                          var count_303 = (data3.match(/CS303/g) || []).length;
+                                          var count_305 = (data3.match(/CS305/g) || []).length;
+                                          var count_307 = (data3.match(/CS307/g) || []).length;
+                                          var count_309 = (data3.match(/CS309/g) || []).length;
+                                          var elective = (data3.match(/Elective/g) || []).length;
+                                          var b2_331 = (data3.match(/B2CS331/g) || []).length;
+                                          var b2_333 = (data3.match(/B2CS333/g) || []).length;
+                                          var count_341 = (data3.match(/CS341/g) || []).length;
+                                          sum_arr.push(count_301);
+                                          sum_arr.push(count_303);
+                                          sum_arr.push(count_305);
+                                          sum_arr.push(count_307);
+                                          sum_arr.push(count_309);
+                                          sum_arr.push(elective);
+                                          sum_arr.push(0);
+                                          sum_arr.push(0);
+                                          sum_arr.push(count_341);
+                                          sum_arr.push(b2_331);
+                                          sum_arr.push(b2_333);
+                                      //done
+                                      for (var i = 0; i < 11; i++) {
+                                        var temp_val = sum_arr[i] - abs_arr[i];
+                                        var temp_va = temp_val / sum_arr[i];
+                                        var temp_v = temp_va * 100;
+                                        per_arr.push(temp_v.toFixed(2));
+
                                       }
-                                      if (bunk_count == 0) {
+
+                                      for (var i = 0; i < 11; i++) {
                                         var loop_temp_sum = sum_arr[i];
                                         var loop_temp_abs = abs_arr[i];
-                                        while (k != 0) {
-                                          if (loop_temp_abs * 4 > loop_temp_sum) {
-                                            att_count++;
+                                        var j = 1;
+                                        var k = 1;
+                                        var bunk_count = 0;
+                                        var att_count = 0;
+                                        while (j != 0) {
+                                          if (loop_temp_abs * 4 < loop_temp_sum) {
+                                            bunk_count++;
+                                            loop_temp_abs++;
                                             loop_temp_sum++;
                                           } else {
-                                            k = 0;
+                                            j = 0;
                                           }
                                         }
-                                        if (att_count != 0) {
-                                          att_count++;
+                                        if (bunk_count == 0) {
+                                          var loop_temp_sum = sum_arr[i];
+                                          var loop_temp_abs = abs_arr[i];
+                                          while (k != 0) {
+                                            if (loop_temp_abs * 4 > loop_temp_sum) {
+                                              att_count++;
+                                              loop_temp_sum++;
+                                            } else {
+                                              k = 0;
+                                            }
+                                          }
+                                          if (att_count != 0) {
+                                            att_count++;
+                                          }
+                                        } else if (bunk_count > 0) {
+                                          bunk_count--;
                                         }
-                                      } else if (bunk_count > 0) {
-                                        bunk_count--;
+                                        bun_arr.push(bunk_count);
+                                        toatt_arr.push(att_count);
                                       }
-                                      bun_arr.push(bunk_count);
-                                      toatt_arr.push(att_count);
+                                      //BUNKBOXWRITE
+                                      bunkboxdata.find({
+                                        uid: uid
+                                      }).deleteMany(function(err) {
+                                        if (err) {
+                                          console.log(err);
+                                        } else {
+                                          var t5_data = new bunkboxdata({
+                                            uid: uid,
+                                            abs_arr: abs_arr,
+                                            sum_arr: sum_arr,
+                                            per_arr: per_arr,
+                                            bun_arr: bun_arr,
+                                            toatt_arr: toatt_arr
+                                          });
+                                          t5_data.save(function(err) {
+                                            if (err) {
+                                              console.log(err);
+                                            } else {
+                                              res.render('profile.ejs', {
+                                                stud_name: stud_db.name,
+                                                class_name: stud_db.au_class,
+                                                date: middleWare.current_date,
+                                                day: middleWare.day,
+                                                check_ed: " ",
+                                                arr: day_table,
+                                                table_arr: timetable_read,
+                                                hidstr: middleWare.intent_empty_string,
+                                                response: thk_res,
+                                                hidyesorno: alter_table,
+                                                absent_arr: abs_arr,
+                                                summary_arr: sum_arr,
+                                                percent_arr: per_arr,
+                                                bunk_arr: bun_arr,
+                                                attend_arr: toatt_arr,
+                                                hidebox_1:"hidden",
+                                                hidebox_2:""
+                                              });
+                                            }
+                                          });
+
+                                        }
+                                      });
                                     }
-                                    //BUNKBOXWRITE
-                                    bunkboxdata.find({
-                                      uid: uid
-                                    }).deleteMany(function(err) {
-                                      if (err) {
-                                        console.log(err);
-                                      } else {
-                                        var t5_data = new bunkboxdata({
-                                          uid: uid,
-                                          abs_arr: abs_arr,
-                                          sum_arr: sum_arr,
-                                          per_arr: per_arr,
-                                          bun_arr: bun_arr,
-                                          toatt_arr: toatt_arr
-                                        });
-                                        t5_data.save(function(err) {
-                                          if (err) {
-                                            console.log(err);
-                                          } else {
-                                            res.render('profile.ejs', {
-                                              stud_name: stud_db.name,
-                                              class_name: stud_db.au_class,
-                                              date: middleWare.current_date,
-                                              day: middleWare.day,
-                                              check_ed: " ",
-                                              arr: day_table,
-                                              table_arr: timetable_read,
-                                              hidstr: middleWare.intent_empty_string,
-                                              response: thk_res,
-                                              hidyesorno: alter_table,
-                                              absent_arr: abs_arr,
-                                              summary_arr: sum_arr,
-                                              percent_arr: per_arr,
-                                              bunk_arr: bun_arr,
-                                              attend_arr: toatt_arr
-                                            });
-                                          }
-                                        });
+                                  });
+                                    }else{
+                                      var data4 = result.toString()
+                                      var a_count_301 = (data4.match(/CS301/g) || []).length;
+                                      var a_count_303 = (data4.match(/CS303/g) || []).length;
+                                      var a_count_305 = (data4.match(/CS305/g) || []).length;
+                                      var a_count_307 = (data4.match(/CS307/g) || []).length;
+                                      var a_count_309 = (data4.match(/CS309/g) || []).length;
+                                      //Elective
+                                      var a = (data4.match(/CS361/g) || []).length;
+                                      var b = (data4.match(/CS365/g) || []).length;
+                                      var c = (data4.match(/CS367/g) || []).length;
+                                      var d = (data4.match(/CS369/g) || []).length;
+                                      var a_elective = a + b + c + d;
+                                      //=======
+                                      var b1_331 = (data4.match(/CS331/g) || []).length;
+                                      var b1_333 = (data4.match(/CS333/g) || []).length;
+                                      var a_count_341 = (data4.match(/CS341/g) || []).length;
+                                      abs_arr.push(a_count_301);
+                                      abs_arr.push(a_count_303);
+                                      abs_arr.push(a_count_305);
+                                      abs_arr.push(a_count_307);
+                                      abs_arr.push(a_count_309);
+                                      abs_arr.push(a_elective);
+                                      abs_arr.push(b1_331);
+                                      abs_arr.push(b1_333);
+                                      abs_arr.push(a_count_341);
+                                      abs_arr.push(0);
+                                      abs_arr.push(0);
+                                      //SUMMARY
+                                      sumdata.find({}, function(err, result) {
+                                        if (err) {
+                                          console.log(err);
+                                          console.log("ERROR in loading Summary")
+                                        } else {
+                                          data3 = result[0]["sumVal"].toString();
+                                          var count_301 = (data3.match(/CS301/g) || []).length;
+                                          var count_303 = (data3.match(/CS303/g) || []).length;
+                                          var count_305 = (data3.match(/CS305/g) || []).length;
+                                          var count_307 = (data3.match(/CS307/g) || []).length;
+                                          var count_309 = (data3.match(/CS309/g) || []).length;
+                                          var elective = (data3.match(/Elective/g) || []).length;
+                                          var b1_331 = (data3.match(/B1CS331/g) || []).length;
+                                          var b1_333 = (data3.match(/B1CS333/g) || []).length;
+                                          var count_341 = (data3.match(/CS341/g) || []).length;
+                                          sum_arr.push(count_301);
+                                          sum_arr.push(count_303);
+                                          sum_arr.push(count_305);
+                                          sum_arr.push(count_307);
+                                          sum_arr.push(count_309);
+                                          sum_arr.push(elective);
+                                          sum_arr.push(b1_331);
+                                          sum_arr.push(b1_333);
+                                          sum_arr.push(count_341);
+                                          sum_arr.push(0);
+                                          sum_arr.push(0);
+                                      for (var i = 0; i < 11; i++) {
+                                        var temp_val = sum_arr[i] - abs_arr[i];
+                                        var temp_va = temp_val / sum_arr[i];
+                                        var temp_v = temp_va * 100;
+                                        per_arr.push(temp_v.toFixed(2));
                                       }
-                                    });
-
-
-                                  }
-                                });
-                              }
-                            });
+                                      for (var i = 0; i < 11; i++) {
+                                        var loop_temp_sum = sum_arr[i];
+                                        var loop_temp_abs = abs_arr[i];
+                                        var j = 1;
+                                        var k = 1;
+                                        var bunk_count = 0;
+                                        var att_count = 0;
+                                        while (j != 0) {
+                                          if (loop_temp_abs * 4 < loop_temp_sum) {
+                                            bunk_count++;
+                                            loop_temp_abs++;
+                                            loop_temp_sum++;
+                                          } else {
+                                            j = 0;
+                                          }
+                                        }
+                                        if (bunk_count == 0) {
+                                          var loop_temp_sum = sum_arr[i];
+                                          var loop_temp_abs = abs_arr[i];
+                                          while (k != 0) {
+                                            if (loop_temp_abs * 4 > loop_temp_sum) {
+                                              att_count++;
+                                              loop_temp_sum++;
+                                            } else {
+                                              k = 0;
+                                            }
+                                          }
+                                          if (att_count != 0) {
+                                            att_count++;
+                                          }
+                                        } else if (bunk_count > 0) {
+                                          bunk_count--;
+                                        }
+                                        bun_arr.push(bunk_count);
+                                        toatt_arr.push(att_count);
+                                      }
+                                      //BUNKBOXWRITE
+                                      bunkboxdata.find({
+                                        uid: uid
+                                      }).deleteMany(function(err) {
+                                        if (err) {
+                                          console.log(err);
+                                        } else {
+                                          var t5_data = new bunkboxdata({
+                                            uid: uid,
+                                            abs_arr: abs_arr,
+                                            sum_arr: sum_arr,
+                                            per_arr: per_arr,
+                                            bun_arr: bun_arr,
+                                            toatt_arr: toatt_arr
+                                          });
+                                          t5_data.save(function(err) {
+                                            if (err) {
+                                              console.log(err);
+                                            } else {
+                                              res.render('profile.ejs', {
+                                                stud_name: stud_db.name,
+                                                class_name: stud_db.au_class,
+                                                date: middleWare.current_date,
+                                                day: middleWare.day,
+                                                check_ed: " ",
+                                                arr: day_table,
+                                                table_arr: timetable_read,
+                                                hidstr: middleWare.intent_empty_string,
+                                                response: thk_res,
+                                                hidyesorno: alter_table,
+                                                absent_arr: abs_arr,
+                                                summary_arr: sum_arr,
+                                                percent_arr: per_arr,
+                                                bunk_arr: bun_arr,
+                                                attend_arr: toatt_arr,
+                                                hidebox_1:"",
+                                                hidebox_2:"hidden"
+                                              });
+                                            }
+                                          });
+                                        }
+                                      });
+                                    }
+                                  });
+                                }
+                                //==================
+                            //   }
+                            // });
                             //=========================================
+                          }
+                        });
                           }
                         });
                       }
@@ -376,6 +536,7 @@ router.post("/home", function(req, res) {
                             console.log(err);
                           } else {
                             day_table = result[0]["daytable"];
+                            if(roll>=32){
                             //SUMMARY
                             sumdata.find({}, function(err, result) {
                               if (err) {
@@ -388,8 +549,8 @@ router.post("/home", function(req, res) {
                                 var count_307 = (data3.match(/CS307/g) || []).length;
                                 var count_309 = (data3.match(/CS309/g) || []).length;
                                 var elective = (data3.match(/Elective/g) || []).length;
-                                var count_331 = (data3.match(/CS331/g) || []).length;
-                                var count_333 = (data3.match(/CS333/g) || []).length;
+                                var count_331 = (data3.match(/B2CS331/g) || []).length;
+                                var count_333 = (data3.match(/B2CS333/g) || []).length;
                                 var count_341 = (data3.match(/CS341/g) || []).length;
                                 sum_arr.push(count_301);
                                 sum_arr.push(count_303);
@@ -397,9 +558,11 @@ router.post("/home", function(req, res) {
                                 sum_arr.push(count_307);
                                 sum_arr.push(count_309);
                                 sum_arr.push(elective);
+                                sum_arr.push(0);
+                                sum_arr.push(0);
+                                sum_arr.push(count_341);
                                 sum_arr.push(count_331);
                                 sum_arr.push(count_333);
-                                sum_arr.push(count_341);
                                 var abs_db;
                                 abs_datas.find({
                                   uid: uid
@@ -408,6 +571,7 @@ router.post("/home", function(req, res) {
                                     console.log(err);
                                   } else {
                                     var data4 = result.toString()
+
                                     var a_count_301 = (data4.match(/CS301/g) || []).length;
                                     var a_count_303 = (data4.match(/CS303/g) || []).length;
                                     var a_count_305 = (data4.match(/CS305/g) || []).length;
@@ -420,8 +584,8 @@ router.post("/home", function(req, res) {
                                     var d = (data4.match(/CS369/g) || []).length;
                                     var a_elective = a + b + c + d;
                                     //=======
-                                    var a_count_331 = (data4.match(/CS331/g) || []).length;
-                                    var a_count_333 = (data4.match(/CS333/g) || []).length;
+                                    var b2_331 = (data4.match(/CS331/g) || []).length;
+                                    var b2_333 = (data4.match(/CS331/g) || []).length;
                                     var a_count_341 = (data4.match(/CS341/g) || []).length;
                                     abs_arr.push(a_count_301);
                                     abs_arr.push(a_count_303);
@@ -429,16 +593,18 @@ router.post("/home", function(req, res) {
                                     abs_arr.push(a_count_307);
                                     abs_arr.push(a_count_309);
                                     abs_arr.push(a_elective);
-                                    abs_arr.push(a_count_331);
-                                    abs_arr.push(a_count_333);
+                                    abs_arr.push(0);
+                                    abs_arr.push(0);
                                     abs_arr.push(a_count_341);
-                                    for (var i = 0; i < 9; i++) {
+                                    abs_arr.push(b2_331);
+                                    abs_arr.push(b2_333);
+                                    for (var i = 0; i < 11; i++) {
                                       var temp_val = sum_arr[i] - abs_arr[i];
                                       var temp_va = temp_val / sum_arr[i];
                                       var temp_v = temp_va * 100;
                                       per_arr.push(temp_v.toFixed(2));
                                     }
-                                    for (var i = 0; i < 9; i++) {
+                                    for (var i = 0; i < 11; i++) {
                                       var loop_temp_sum = sum_arr[i];
                                       var loop_temp_abs = abs_arr[i];
                                       var j = 1;
@@ -505,7 +671,9 @@ router.post("/home", function(req, res) {
                                               summary_arr: sum_arr,
                                               percent_arr: per_arr,
                                               bunk_arr: bun_arr,
-                                              attend_arr: toatt_arr
+                                              attend_arr: toatt_arr,
+                                              hidebox_1:"hidden",
+                                              hidebox_2:""
                                             });
                                           }
                                         });
@@ -516,6 +684,155 @@ router.post("/home", function(req, res) {
                                 });
                               }
                             });
+                          }else{
+                            //SUMMARY
+                            sumdata.find({}, function(err, result) {
+                              if (err) {
+                                console.log(err);
+                              } else {
+                                data3 = result[0]["sumVal"].toString();
+                                var count_301 = (data3.match(/CS301/g) || []).length;
+                                var count_303 = (data3.match(/CS303/g) || []).length;
+                                var count_305 = (data3.match(/CS305/g) || []).length;
+                                var count_307 = (data3.match(/CS307/g) || []).length;
+                                var count_309 = (data3.match(/CS309/g) || []).length;
+                                var elective = (data3.match(/Elective/g) || []).length;
+                                var count_331 = (data3.match(/B1CS331/g) || []).length;
+                                var count_333 = (data3.match(/B1CS333/g) || []).length;
+                                var count_341 = (data3.match(/CS341/g) || []).length;
+                                sum_arr.push(count_301);
+                                sum_arr.push(count_303);
+                                sum_arr.push(count_305);
+                                sum_arr.push(count_307);
+                                sum_arr.push(count_309);
+                                sum_arr.push(elective);
+                                sum_arr.push(count_331);
+                                sum_arr.push(count_333);
+                                sum_arr.push(count_341);
+                                sum_arr.push(0);
+                                sum_arr.push(0);
+                                var abs_db;
+                                abs_datas.find({
+                                  uid: uid
+                                }, function(err, result) {
+                                  if (err) {
+                                    console.log(err);
+                                  } else {
+                                    var data4 = result.toString()
+
+                                    var a_count_301 = (data4.match(/CS301/g) || []).length;
+                                    var a_count_303 = (data4.match(/CS303/g) || []).length;
+                                    var a_count_305 = (data4.match(/CS305/g) || []).length;
+                                    var a_count_307 = (data4.match(/CS307/g) || []).length;
+                                    var a_count_309 = (data4.match(/CS309/g) || []).length;
+                                    //Elective
+                                    var a = (data4.match(/CS361/g) || []).length;
+                                    var b = (data4.match(/CS365/g) || []).length;
+                                    var c = (data4.match(/CS367/g) || []).length;
+                                    var d = (data4.match(/CS369/g) || []).length;
+                                    var a_elective = a + b + c + d;
+                                    //=======
+                                    var a_count_331 = (data4.match(/CS331/g) || []).length;
+                                    var a_count_333 = (data4.match(/CS333/g) || []).length;
+                                    var a_count_341 = (data4.match(/CS341/g) || []).length;
+                                    abs_arr.push(a_count_301);
+                                    abs_arr.push(a_count_303);
+                                    abs_arr.push(a_count_305);
+                                    abs_arr.push(a_count_307);
+                                    abs_arr.push(a_count_309);
+                                    abs_arr.push(a_elective);
+                                    abs_arr.push(a_count_331);
+                                    abs_arr.push(a_count_333);
+                                    abs_arr.push(a_count_341);
+                                    abs_arr.push(0);
+                                    abs_arr.push(0);
+                                    for (var i = 0; i < 11; i++) {
+                                      var temp_val = sum_arr[i] - abs_arr[i];
+                                      var temp_va = temp_val / sum_arr[i];
+                                      var temp_v = temp_va * 100;
+                                      per_arr.push(temp_v.toFixed(2));
+                                    }
+                                    for (var i = 0; i < 11; i++) {
+                                      var loop_temp_sum = sum_arr[i];
+                                      var loop_temp_abs = abs_arr[i];
+                                      var j = 1;
+                                      var k = 1;
+                                      var bunk_count = 0;
+                                      var att_count = 0;
+                                      while (j != 0) {
+                                        if (loop_temp_abs * 4 < loop_temp_sum) {
+                                          bunk_count++;
+                                          loop_temp_abs++;
+                                          loop_temp_sum++;
+                                        } else {
+                                          j = 0;
+                                        }
+                                      }
+                                      if (bunk_count == 0) {
+                                        var loop_temp_sum = sum_arr[i];
+                                        var loop_temp_abs = abs_arr[i];
+                                        while (k != 0) {
+                                          if (loop_temp_abs * 4 > loop_temp_sum) {
+                                            att_count++;
+                                            loop_temp_sum++;
+                                          } else {
+                                            k = 0;
+                                          }
+                                        }
+                                      } else if (bunk_count > 0) {
+                                        bunk_count--;
+                                      }
+                                      bun_arr.push(bunk_count);
+                                      toatt_arr.push(att_count);
+                                    }
+                                    //BUNKBOXWRITE
+                                    bunkboxdata.find({
+                                      uid: uid
+                                    }).deleteMany(function(err) {
+                                      if (err) {
+                                        console.log(err);
+                                      } else {
+                                        var t5_data = new bunkboxdata({
+                                          uid: uid,
+                                          abs_arr: abs_arr,
+                                          sum_arr: sum_arr,
+                                          per_arr: per_arr,
+                                          bun_arr: bun_arr,
+                                          toatt_arr: toatt_arr
+                                        });
+                                        t5_data.save(function(err) {
+                                          if (err) {
+                                            console.log(err);
+                                          } else {
+                                            res.render('profile.ejs', {
+                                              stud_name: stud_db.name,
+                                              class_name: stud_db.au_class,
+                                              date: middleWare.current_date,
+                                              day: middleWare.day,
+                                              check_ed: "checked",
+                                              arr: day_table,
+                                              table_arr: timetable_read,
+                                              hidstr: middleWare.intent_empty_string,
+                                              response: thk_res,
+                                              hidyesorno: alter_table,
+                                              absent_arr: abs_arr,
+                                              summary_arr: sum_arr,
+                                              percent_arr: per_arr,
+                                              bunk_arr: bun_arr,
+                                              attend_arr: toatt_arr,
+                                              hidebox_1:"",
+                                              hidebox_2:"hidden"
+                                            });
+                                          }
+                                        });
+                                      }
+                                    });
+
+                                  }
+                                });
+                              }
+                            });
+                          }
                           }
                         });
                       }
@@ -551,6 +868,7 @@ router.post("/home", function(req, res) {
 });
 //================================HOME GET ROUTE================================
 router.get("/home", function(req, res) {
+  roll=uid_list.indexOf(req.session.user);
   var stud_db;
   stud_var.find({
     au_uid: req.session.user
@@ -593,6 +911,27 @@ router.get("/home", function(req, res) {
                           var per_arr = result[0].per_arr;
                           var bun_arr = result[0].bun_arr;
                           var toatt_arr = result[0].toatt_arr;
+                          if(roll>32){
+                            res.render('profile.ejs', {
+                              stud_name: stud_db.name,
+                              class_name: stud_db.au_class,
+                              date: middleWare.current_date,
+                              day: middleWare.day,
+                              check_ed: " ",
+                              arr: daily_timetable,
+                              table_arr: timetable_read,
+                              hidstr: middleWare.intent_empty_string,
+                              response: thk_res,
+                              hidyesorno: alter_table,
+                              absent_arr: abs_arr,
+                              summary_arr: sum_arr,
+                              percent_arr: per_arr,
+                              bunk_arr: bun_arr,
+                              attend_arr: toatt_arr,
+                              hidebox_1:"hidden",
+                              hidebox_2:""
+                            });
+                        }else{
                           res.render('profile.ejs', {
                             stud_name: stud_db.name,
                             class_name: stud_db.au_class,
@@ -608,8 +947,11 @@ router.get("/home", function(req, res) {
                             summary_arr: sum_arr,
                             percent_arr: per_arr,
                             bunk_arr: bun_arr,
-                            attend_arr: toatt_arr
+                            attend_arr: toatt_arr,
+                            hidebox_1:"",
+                            hidebox_2:"hidden"
                           });
+                        }
                         }
                       });
                     }
@@ -633,6 +975,7 @@ router.get("/home", function(req, res) {
                           per_arr = result[0].per_arr;
                           bun_arr = result[0].bun_arr;
                           toatt_arr = result[0].toatt_arr;
+                          if(roll>32){
                           res.render('profile.ejs', {
                             stud_name: stud_db.name,
                             class_name: stud_db.au_class,
@@ -648,8 +991,31 @@ router.get("/home", function(req, res) {
                             summary_arr: sum_arr,
                             percent_arr: per_arr,
                             bunk_arr: bun_arr,
-                            attend_arr: toatt_arr
+                            attend_arr: toatt_arr,
+                            hidebox_1:"hidden",
+                            hidebox_2:""
                           });
+                        }else{
+                          res.render('profile.ejs', {
+                          stud_name: stud_db.name,
+                          class_name: stud_db.au_class,
+                          date: middleWare.current_date,
+                          day: middleWare.day,
+                          check_ed: "checked",
+                          arr: daily_timetable,
+                          table_arr: timetable_read,
+                          hidstr: middleWare.intent_empty_string,
+                          response: thk_res,
+                          hidyesorno: alter_table,
+                          absent_arr: abs_arr,
+                          summary_arr: sum_arr,
+                          percent_arr: per_arr,
+                          bunk_arr: bun_arr,
+                          attend_arr: toatt_arr,
+                          hidebox_1:"",
+                          hidebox_2:"hidden"
+                        });
+                        }
                         }
                       });
 
