@@ -72,12 +72,12 @@ h6{
   position:relative;
   bottom:250px;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1900px) {
   .sub_details{
     width:500px;;
     float:none;
-    margin-left: 50px;
-    margin-top: 10px;
+    margin-left: 200px;
+    margin-top: 100px;
     bottom:0px;
   }
   #t2{
@@ -91,6 +91,9 @@ h6{
   position: relative;
   bottom:200px;
   display: none;
+}
+.cen_ter{
+  text-align: center;
 }
 .middler{
   position: relative;
