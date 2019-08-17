@@ -227,7 +227,7 @@ router.post("/home", function(req, res) {
                                   } else {
 
                                     if(roll>=32){ //B2
-                                      var data4 = result.toString()
+                                      var data4 = result.toString();
                                       var a_count_301 = (data4.match(/CS301/g) || []).length;
                                       var a_count_303 = (data4.match(/CS303/g) || []).length;
                                       var a_count_305 = (data4.match(/CS305/g) || []).length;
@@ -585,7 +585,7 @@ router.post("/home", function(req, res) {
                                     var a_elective = a + b + c + d;
                                     //=======
                                     var b2_331 = (data4.match(/CS331/g) || []).length;
-                                    var b2_333 = (data4.match(/CS331/g) || []).length;
+                                    var b2_333 = (data4.match(/CS333/g) || []).length;
                                     var a_count_341 = (data4.match(/CS341/g) || []).length;
                                     abs_arr.push(a_count_301);
                                     abs_arr.push(a_count_303);
