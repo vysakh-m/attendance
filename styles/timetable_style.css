@@ -64,7 +64,11 @@ h6{
 #t1{
   width:70%;
   margin-top: 50px;
-
+}
+@media (max-width:570px){
+  #t1{
+    width:50%;
+  }
 }
 .sub_details{
   width:30%;
