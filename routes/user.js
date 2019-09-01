@@ -1205,7 +1205,8 @@ router.get("/summary", function(req, res) {
             res.render('summary.ejs', {
               stud_name: stud_db.name,
               class_name: stud_db.au_class,
-              sumarr: summary
+              sumarr: summary,
+              working: summary.length
             });
           }
         });
